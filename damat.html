@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="groom">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emre & Elif Düğün Töreni Davetiyesi - 20 Kasım 2026">
+  <title>Emre & Elif — Düğün Töreni 🤵</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤵</text></svg>">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Groom page specific */
+    .paper-texture {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #fdf8f0;
+      background-image:
+        radial-gradient(ellipse at 20% 80%, rgba(12,92,92,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    .page-header-gradient {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 300px;
+      background: linear-gradient(180deg, rgba(12,92,92,0.06) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Photo placeholder */
+    .couple-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 4px 20px rgba(12,92,92,0.2), 0 0 0 4px white, 0 0 0 6px var(--gold-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .couple-photo::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      border-radius: 50%;
+    }
+
+    /* Decorative leaf garland */
+    .garland {
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 8px;
+      opacity: 0.3;
+      margin: 1rem 0;
+    }
+
+    /* Venue card enhancement */
+    .venue-highlight {
+      background: var(--cream);
+      border: 1.5px solid var(--gold-light);
+      border-radius: var(--border-radius-sm);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .venue-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .venue-address {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Dress code section */
+    .dress-code {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: var(--border-radius-sm);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--cream-dark);
+    }
+
+    .dress-code-item {
+      text-align: center;
+    }
+
+    .dress-code-item .icon {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .dress-code-item .label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Success notification */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 200;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body data-page="groom">
+  <!-- Loading Screen -->
+  <div class="loading-screen" style="background: #fdf8f0;">
+    <div class="loading-icon">🤵</div>
+    <div class="loading-text">Düğün Davetiyesi Yükleniyor...</div>
+  </div>
+
+  <!-- Particles -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Background -->
+  <div class="paper-texture"></div>
+  <div class="page-header-gradient"></div>
+  <div class="ottoman-pattern"></div>
+
+  <!-- Navigation Back -->
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Ana Sayfa
+  </a>
+
+  <!-- Main Content -->
+  <div class="page-wrapper invitation-backdrop" style="background:transparent;">
+    <div class="card-container" style="padding-top: 4rem;">
+
+      <!-- Section 1: Quote -->
+      <div class="section" style="opacity:1; transform:none;">
+        <div class="hero-quote">
+          <p class="quote-text">
+            Kaynaşmanız için size kendi cinsinizden eşler yaratıp, aranıza sevgi ve merhamet koyması da O'nun ayetlerindendir.
+          </p>
+          <p class="quote-author">— Rum Suresi, 30:21</p>
+        </div>
+
+        <div class="ottoman-divider">
+          <span class="tulip">🌷</span>
+        </div>
+      </div>
+
+      <!-- Section 2: Envelope & Photo -->
+      <div class="section">
+        <div class="envelope-section">
+          <!-- Envelope Graphic -->
+          <div class="envelope-graphic">
+            <div class="envelope-body">
+              <div class="envelope-seal">💍</div>
+              <div class="envelope-names">Emre ♡ Elif</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="garland">🍃 🌿 🍃 🌿 🍃</div>
+
+        <!-- Couple Photo Placeholder -->
+        <div class="couple-photo">
+          <span>💑</span>
+        </div>
+      </div>
+
+      <!-- Section 3: Main Invitation Card -->
+      <div class="section">
+        <div class="invitation-card">
+          <!-- Corner Ornaments -->
+          <div class="corner-ornament top-left"></div>
+          <div class="corner-ornament top-right"></div>
+          <div class="corner-ornament bottom-left"></div>
+          <div class="corner-ornament bottom-right"></div>
+
+          <div class="card-inner">
+            <div class="invitation-label">Düğün Davetiyesi</div>
+
+            <h2 class="invitation-couple-names">
+              Emre Yılmaz
+              <span class="amp">&</span>
+              Elif Demir
+            </h2>
+
+            <p class="invitation-statement">
+              Ailelerimizin mutluluğuyla, hayatımızı birleştirdiğimiz bu güzel günde sizi de aramızda görmekten büyük mutluluk duyacağız.
+              <br><br>
+              Varlığınızla şeref vereceğiniz düğün törenimize saygıyla davet ederiz.
+            </p>
+
+            <!-- Event Details -->
+            <div class="event-info">
+              <div class="event-info-item">
+                <div class="info-icon">📅</div>
+                <div>
+                  <div class="info-label">Tarih</div>
+                  <div class="info-value">Cuma, 20 Kasım 2026</div>
+                </div>
+              </div>
+
+              <div class="event-info-item">
+                <div class="info-icon">⏰</div>
+                <div>
+                  <div class="info-label">Saat</div>
+                  <div class="info-value">Akşam Saat 19:00</div>
+                </div>
+              </div>
+
+              <div class="event-info-item">
+                <div class="info-icon">📍</div>
+                <div>
+                  <div class="info-label">Mekan</div>
+                  <div class="info-value">Çırağan Sarayı Balo Salonu</div>
+                </div>
+              </div>
+
+              <div class="event-info-item">
+                <div class="info-icon">👔</div>
+                <div>
+                  <div class="info-label">Kıyafet Kodu</div>
+                  <div class="info-value">Resmi / Davetiye Kıyafeti</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Countdown -->
+      <div class="section">
+        <div class="countdown-section" data-countdown="2026-11-20T19:00:00">
+          <h3 class="countdown-title">Büyük Güne Geri Sayım</h3>
+
+          <div class="countdown-grid">
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-days">0</div>
+              <div class="countdown-label">Gün</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-hours">0</div>
+              <div class="countdown-label">Saat</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-minutes">0</div>
+              <div class="countdown-label">Dakika</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-seconds">0</div>
+              <div class="countdown-label">Saniye</div>
+            </div>
+          </div>
+
+          <p class="countdown-tagline">
+            Mutluluğumuz başladı · Hayırlısıyla inşallah 🤲
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 5: Gallery Placeholder -->
+      <div class="section">
+        <div class="gallery-section">
+          <h3 class="gallery-title">Bizim Hikayemiz</h3>
+          <p class="gallery-subtitle">Birlikte geçen güzel anlarımız</p>
+
+          <div class="gallery-grid">
+            <div class="gallery-item" style="background: linear-gradient(135deg, #0c5c5c, #1a8a8a); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">🌅</span>
+              <div class="gallery-overlay"><span>İstanbul'da Gün Batımı</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #074040, #0c5c5c); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">☕</span>
+              <div class="gallery-overlay"><span>İlk Türk Kahvemiz</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #1a7a7a, #0c5c5c); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">🌉</span>
+              <div class="gallery-overlay"><span>Boğaz'da Bir Akşam</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #0c5c5c, #074040); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">💐</span>
+              <div class="gallery-overlay"><span>Nişan Günümüz</span></div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #074040, #1a8a8a); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:3rem;">🌷</span>
+              <div class="gallery-overlay"><span>Lale Bahçesinde</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Venue & Map -->
+      <div class="section">
+        <div class="map-section">
+          <h3 class="map-title">Düğün Mekanımız</h3>
+
+          <div class="venue-highlight">
+            <div class="venue-name">🏰 Çırağan Sarayı Balo Salonu</div>
+            <div class="venue-address">Çırağan Cd. No:32, Beşiktaş, İstanbul</div>
+          </div>
+
+          <div class="map-container mt-2">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.1!2d29.0224!3d41.0464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab76d3a0b8e25%3A0x45e4d0c3e0c4f0a0!2s%C3%87%C4%B1ra%C4%9Fan%20Palace%20Kempinski%20Istanbul!5e0!3m2!1str!2str"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <a href="https://maps.google.com/?q=Çırağan+Sarayı+İstanbul" target="_blank" class="btn btn-primary mt-2">
+            📍 Yol Tarifi Al
+          </a>
+        </div>
+      </div>
+
+      <!-- Section 7: Guestbook -->
+      <div class="section">
+        <div class="guestbook-section">
+          <div class="guestbook-header">
+            <h3 class="guestbook-title">Dileklerinizi Bırakın 💌</h3>
+            <p class="guestbook-subtitle">Güzel sözleriniz bizim için çok değerli</p>
+          </div>
+
+          <form class="guestbook-form" id="guestbook-form">
+            <div class="form-group">
+              <label class="form-label" for="guest-name">Adınız</label>
+              <input class="form-input" type="text" name="guest-name" id="guest-name" placeholder="Adınızı yazınız..." required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="guest-message">Tebrik Mesajınız</label>
+              <textarea class="form-textarea" name="guest-message" id="guest-message" placeholder="Tebriklerinizi ve güzel dileklerinizi yazınız..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold" style="width:100%;">
+              💌 Tebriği Gönder
+            </button>
+          </form>
+
+          <div class="wishes-feed" id="wishes-feed"></div>
+        </div>
+      </div>
+
+      <!-- Section 8: Dress Code -->
+      <div class="section">
+        <div class="section-header">
+          <h3 class="section-title">Kıyafet Rehberi</h3>
+          <p class="section-subtitle">Gecemize uygun kıyafet önerileri</p>
+        </div>
+        <div class="dress-code">
+          <div class="dress-code-item">
+            <div class="icon">🤵</div>
+            <div class="label">Takım Elbise</div>
+          </div>
+          <div class="dress-code-item">
+            <div class="icon">👗</div>
+            <div class="label">Abiye</div>
+          </div>
+          <div class="dress-code-item">
+            <div class="icon">🎨</div>
+            <div class="label">Koyu Tonlar</div>
+          </div>
+          <div class="dress-code-item">
+            <div class="icon">🌿</div>
+            <div class="label">Teal & Gold</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Istanbul Skyline Decoration -->
+      <div class="section" style="opacity:1; transform:none;">
+        <div class="istanbul-skyline">
+          <svg viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0,80 L0,60 L20,60 L20,40 Q35,15 50,40 L50,60 L53,60 L53,20 L55,15 L57,20 L57,60 L70,60 L70,45 Q85,20 100,45 L100,60 L130,60 L130,50 L145,50 L145,35 L160,35 L160,50 L175,50 L175,60 L200,60 L200,45 Q215,15 230,45 L230,60 L233,60 L233,18 L235,10 L237,18 L237,60 L250,60 L250,45 Q265,20 280,45 L280,60 L310,60 L310,65 L340,65 L340,50 L350,50 L350,35 L355,35 L355,20 L360,15 L365,20 L365,35 L370,35 L370,50 L380,50 L380,65 L420,65 L420,55 Q435,25 450,55 L450,65 L453,65 L453,25 L455,18 L457,25 L457,65 L470,65 L470,50 L490,50 L490,40 L505,40 L505,50 L520,50 L520,65 L560,65 L560,50 Q575,20 590,50 L590,65 L593,65 L593,22 L595,12 L597,22 L597,65 L610,65 L610,55 L630,55 L630,45 L645,45 L645,30 L650,25 L655,30 L655,45 L670,45 L670,55 L690,55 L690,65 L730,65 L730,50 Q745,25 760,50 L760,65 L763,65 L763,28 L765,20 L767,28 L767,65 L800,65 L800,80Z" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <p class="footer-quote">
+          "Varlığınızla şeref verdiniz, teşekkür ederiz." 🌷
+        </p>
+
+        <div class="ottoman-divider" style="max-width:200px;">
+          <span class="tulip">✦</span>
+        </div>
+
+        <p class="footer-copyright">
+          © 2026 Emre & Elif · Designed with ❤️ in İstanbul
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Music Toggle -->
+  <button class="music-toggle" title="Müzik Aç/Kapat" aria-label="Müzik kontrolü">
+    <div class="sound-bars">
+      <div class="bar" style="height:4px;"></div>
+      <div class="bar" style="height:4px;"></div>
+      <div class="bar" style="height:4px;"></div>
+      <div class="bar" style="height:4px;"></div>
+    </div>
+  </button>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" title="Yukarı Çık" aria-label="Sayfa başına dön">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- Background Music (placeholder - replace src with actual music file) -->
+  <audio id="bg-music" loop preload="auto">
+    <!-- Replace with your Turkish wedding music file -->
+    <!-- <source src="music/dugun-muzigi.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <script src="main.js"></script>
+</body>
+</html>
