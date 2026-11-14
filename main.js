@@ -2,7 +2,8 @@
   ╔══════════════════════════════════════════════════╗
   ║  Turkish Wedding Invitation - Main JavaScript    ║
   ║  Features: Countdown, Particles, Guestbook,      ║
-  ║  Music Toggle, Scroll Reveal, Smooth Scroll      ║
+  ║  Music Toggle (HTML5 Audio + WebAudio Synth),    ║
+  ║  Interactive Envelope, Scroll Reveal             ║
   ╚══════════════════════════════════════════════════╝
 */
 
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParticles();
   initMusicToggle();
   initGuestbook();
+  initEnvelopeInteraction();
 });
 
 /* ===== Loading Screen ===== */
@@ -21,26 +23,38 @@ function initLoadingScreen() {
   const loader = document.querySelector('.loading-screen');
   if (!loader) return;
   
-  window.addEventListener('load', () => {
+  function hideLoader() {
+    if (loader.classList.contains('hidden')) return;
+    loader.classList.add('hidden');
     setTimeout(() => {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 800);
-    }, 1500);
-  });
+      try { loader.remove(); } catch(e) {}
+    }, 600);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(hideLoader, 500);
+  } else {
+    window.addEventListener('load', () => setTimeout(hideLoader, 500));
+  }
   
-  // Fallback: hide after 4s regardless
-  setTimeout(() => {
-    if (loader && !loader.classList.contains('hidden')) {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 800);
-    }
-  }, 4000);
+  // Safe fallback (never block the user for more than 1.2s)
+  setTimeout(hideLoader, 1200);
 }
 
 /* ===== Scroll Reveal ===== */
 function initScrollReveal() {
   const sections = document.querySelectorAll('.section');
   if (!sections.length) return;
+
+  // Immediately reveal sections in or near the viewport
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 150) {
+      section.classList.add('revealed');
+    }
+  });
+
+  document.body.classList.add('has-scroll-anim');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -50,11 +64,37 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05,
+    rootMargin: '100px 0px 50px 0px'
   });
 
-  sections.forEach(section => observer.observe(section));
+  sections.forEach(section => {
+    if (!section.classList.contains('revealed')) {
+      observer.observe(section);
+    }
+  });
+}
+
+/* ===== Interactive Envelope ===== */
+function initEnvelopeInteraction() {
+  const envelope = document.querySelector('.envelope-graphic');
+  const seal = document.querySelector('.envelope-seal');
+  if (!envelope) return;
+
+  function openEnvelope() {
+    envelope.classList.toggle('opened');
+    
+    // Smooth scroll down to main invitation card
+    const card = document.querySelector('.invitation-card');
+    if (card) {
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
+    }
+  }
+
+  if (seal) seal.addEventListener('click', openEnvelope);
+  envelope.addEventListener('click', openEnvelope);
 }
 
 /* ===== Scroll to Top ===== */
@@ -63,7 +103,7 @@ function initScrollToTop() {
   if (!btn) return;
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
+    if (window.scrollY > 350) {
       btn.classList.add('visible');
     } else {
       btn.classList.remove('visible');
@@ -139,7 +179,7 @@ function initParticles() {
       this.size = Math.random() * 4 + 2;
       this.speedY = -(Math.random() * 0.8 + 0.2);
       this.speedX = (Math.random() - 0.5) * 0.5;
-      this.opacity = Math.random() * 0.5 + 0.1;
+      this.opacity = Math.random() * 0.5 + 0.15;
       this.rotation = Math.random() * 360;
       this.rotationSpeed = (Math.random() - 0.5) * 2;
       this.type = Math.random() > 0.5 ? 'heart' : 'star';
@@ -198,11 +238,10 @@ function initParticles() {
     }
   }
 
-  // Create particles
-  const count = Math.min(40, Math.floor(window.innerWidth / 25));
+  const count = Math.min(35, Math.floor(window.innerWidth / 28));
   for (let i = 0; i < count; i++) {
     const p = new Particle();
-    p.y = Math.random() * canvas.height; // Start scattered
+    p.y = Math.random() * canvas.height;
     particles.push(p);
   }
 
@@ -218,38 +257,170 @@ function initParticles() {
   animate();
 }
 
+/* ===== Ambient Turkish Romantic Melodic Synthesizer ===== */
+// Uses Web Audio API to play a soothing, romantic acoustic Oud/Kanun-inspired melody
+class TurkishMelodySynth {
+  constructor() {
+    this.ctx = null;
+    this.isPlaying = false;
+    this.timer = null;
+    this.step = 0;
+    // Turkish Nihavend / Rast romantic acoustic notes (frequencies in Hz)
+    this.notes = [
+      220.00, // A3
+      246.94, // B3
+      261.63, // C4
+      293.66, // D4
+      329.63, // E4
+      349.23, // F4
+      392.00, // G4
+      440.00, // A4
+      493.88, // B4
+      523.25, // C5
+      587.33  // D5
+    ];
+    // Romantic melody pattern (indices into this.notes)
+    this.melody = [
+      { n: 4, d: 0.6 }, { n: 6, d: 0.4 }, { n: 7, d: 0.8 },
+      { n: 6, d: 0.4 }, { n: 4, d: 0.6 }, { n: 3, d: 0.8 },
+      { n: 2, d: 0.4 }, { n: 3, d: 0.4 }, { n: 4, d: 0.8 },
+      { n: 2, d: 0.6 }, { n: 0, d: 1.0 },
+      // Second phrase
+      { n: 4, d: 0.5 }, { n: 7, d: 0.5 }, { n: 9, d: 0.9 },
+      { n: 8, d: 0.4 }, { n: 7, d: 0.6 }, { n: 6, d: 0.8 },
+      { n: 4, d: 0.4 }, { n: 3, d: 0.4 }, { n: 2, d: 0.8 },
+      { n: 0, d: 1.2 }
+    ];
+  }
+
+  initContext() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  }
+
+  playPluck(freq, duration) {
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    
+    // Main warm oscillator (triangle for acoustic wood resonance)
+    const osc = this.ctx.createOscillator();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, now);
+
+    // Subtle overtone for plucked string authenticity
+    const osc2 = this.ctx.createOscillator();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 2, now);
+
+    // Low-pass filter simulating wooden acoustic body
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1400, now);
+    filter.frequency.exponentialRampToValueAtTime(350, now + duration);
+
+    // Gain envelope with soft gentle pluck
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.12, now + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 1.5);
+
+    const gain2 = this.ctx.createGain();
+    gain2.gain.setValueAtTime(0.03, now);
+    gain2.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    osc.connect(filter);
+    osc2.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc2.start(now);
+    osc.stop(now + duration * 1.6);
+    osc2.stop(now + duration * 1.6);
+  }
+
+  start() {
+    this.initContext();
+    this.isPlaying = true;
+    this.step = 0;
+
+    const playNext = () => {
+      if (!this.isPlaying) return;
+      const item = this.melody[this.step % this.melody.length];
+      const freq = this.notes[item.n];
+      this.playPluck(freq, item.d);
+      
+      this.step++;
+      const nextDelay = (item.d * 1000) + 150;
+      this.timer = setTimeout(playNext, nextDelay);
+    };
+
+    playNext();
+  }
+
+  stop() {
+    this.isPlaying = false;
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+  }
+}
+
+const synthPlayer = new TurkishMelodySynth();
+
 /* ===== Music Toggle ===== */
 function initMusicToggle() {
   const toggle = document.querySelector('.music-toggle');
   const audio = document.getElementById('bg-music');
   const soundBars = document.querySelector('.sound-bars');
-  if (!toggle || !audio) return;
+  if (!toggle) return;
 
   let isPlaying = false;
+  const hasAudioSource = audio && audio.querySelector('source') && audio.querySelector('source').getAttribute('src');
+
+  function startMusic() {
+    isPlaying = true;
+    toggle.classList.add('playing');
+    if (soundBars) soundBars.classList.add('playing');
+
+    if (hasAudioSource) {
+      audio.play().catch(() => {
+        synthPlayer.start();
+      });
+    } else {
+      synthPlayer.start();
+    }
+  }
+
+  function stopMusic() {
+    isPlaying = false;
+    toggle.classList.remove('playing');
+    if (soundBars) soundBars.classList.remove('playing');
+
+    if (hasAudioSource) {
+      audio.pause();
+    }
+    synthPlayer.stop();
+  }
 
   toggle.addEventListener('click', () => {
     if (isPlaying) {
-      audio.pause();
-      toggle.classList.remove('playing');
-      if (soundBars) soundBars.classList.remove('playing');
+      stopMusic();
     } else {
-      audio.play().catch(() => {
-        console.log('Audio playback requires user interaction');
-      });
-      toggle.classList.add('playing');
-      if (soundBars) soundBars.classList.add('playing');
+      startMusic();
     }
-    isPlaying = !isPlaying;
   });
 
-  // Try autoplay on first user interaction
+  // Autoplay attempt on first user touch/click
   function firstInteraction() {
     if (!isPlaying) {
-      audio.play().then(() => {
-        isPlaying = true;
-        toggle.classList.add('playing');
-        if (soundBars) soundBars.classList.add('playing');
-      }).catch(() => {});
+      startMusic();
     }
     document.removeEventListener('click', firstInteraction);
     document.removeEventListener('touchstart', firstInteraction);
@@ -268,10 +439,8 @@ function initGuestbook() {
   const pageKey = document.body.dataset.page || 'default';
   const storageKey = `wedding_wishes_${pageKey}`;
 
-  // Load existing wishes
   function loadWishes() {
     const wishes = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    // Add demo wishes if empty
     if (wishes.length === 0) {
       const demoWishes = getDemoWishes(pageKey);
       demoWishes.forEach(w => wishes.push(w));
@@ -314,7 +483,6 @@ function initGuestbook() {
     }
   }
 
-  // Handle form submit
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -336,11 +504,9 @@ function initGuestbook() {
     localStorage.setItem(storageKey, JSON.stringify(wishes));
     renderWishes(wishes);
 
-    // Reset form
     nameInput.value = '';
     messageInput.value = '';
 
-    // Show success feedback
     const btn = form.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
     btn.textContent = '✓ Gönderildi!';
