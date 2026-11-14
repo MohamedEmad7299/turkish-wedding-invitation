@@ -1,133 +1,40 @@
 /*
-  ╔══════════════════════════════════════════════════╗
-  ║  Turkish Wedding Invitation - Main JavaScript    ║
-  ║  Features: Countdown, Particles, Guestbook,      ║
-  ║  Music Toggle (HTML5 Audio + WebAudio Synth),    ║
-  ║  Interactive Envelope, Scroll Reveal             ║
-  ╚══════════════════════════════════════════════════╝
+  ============================================================
+  THE ROYAL WEDDING OF ALEXANDER & SOPHIA
+  Client Script: Countdown, Real Audio Player, RSVP & Guestbook
+  ============================================================
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initLoadingScreen();
-  initScrollReveal();
-  initScrollToTop();
   initCountdown();
-  initParticles();
-  initMusicToggle();
+  initAudioPlayer();
+  initRSVPForm();
   initGuestbook();
-  initEnvelopeInteraction();
+  initSmoothScroll();
 });
 
-/* ===== Loading Screen ===== */
-function initLoadingScreen() {
-  const loader = document.querySelector('.loading-screen');
-  if (!loader) return;
-  
-  function hideLoader() {
-    if (loader.classList.contains('hidden')) return;
-    loader.classList.add('hidden');
-    setTimeout(() => {
-      try { loader.remove(); } catch(e) {}
-    }, 600);
-  }
-
-  if (document.readyState === 'complete') {
-    setTimeout(hideLoader, 500);
-  } else {
-    window.addEventListener('load', () => setTimeout(hideLoader, 500));
-  }
-  
-  // Safe fallback (never block the user for more than 1.2s)
-  setTimeout(hideLoader, 1200);
-}
-
-/* ===== Scroll Reveal ===== */
-function initScrollReveal() {
-  const sections = document.querySelectorAll('.section');
-  if (!sections.length) return;
-
-  // Immediately reveal sections in or near the viewport
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 150) {
-      section.classList.add('revealed');
-    }
-  });
-
-  document.body.classList.add('has-scroll-anim');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.05,
-    rootMargin: '100px 0px 50px 0px'
-  });
-
-  sections.forEach(section => {
-    if (!section.classList.contains('revealed')) {
-      observer.observe(section);
-    }
-  });
-}
-
-/* ===== Interactive Envelope ===== */
-function initEnvelopeInteraction() {
-  const envelope = document.querySelector('.envelope-graphic');
-  const seal = document.querySelector('.envelope-seal');
-  if (!envelope) return;
-
-  function openEnvelope() {
-    envelope.classList.toggle('opened');
-    
-    // Smooth scroll down to main invitation card
-    const card = document.querySelector('.invitation-card');
-    if (card) {
-      setTimeout(() => {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 350);
-    }
-  }
-
-  if (seal) seal.addEventListener('click', openEnvelope);
-  envelope.addEventListener('click', openEnvelope);
-}
-
-/* ===== Scroll to Top ===== */
-function initScrollToTop() {
-  const btn = document.querySelector('.scroll-top');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 350) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-/* ===== Countdown Timer ===== */
+/* ============================================================
+   COUNTDOWN TIMER
+   ============================================================ */
 function initCountdown() {
-  const countdownEl = document.querySelector('[data-countdown]');
-  if (!countdownEl) return;
+  const container = document.querySelector('[data-countdown]');
+  if (!container) return;
 
-  const targetDate = new Date(countdownEl.dataset.countdown).getTime();
+  const targetDate = new Date(container.dataset.countdown).getTime();
+  const daysEl = document.getElementById('count-days');
+  const hoursEl = document.getElementById('count-hours');
+  const minutesEl = document.getElementById('count-minutes');
+  const secondsEl = document.getElementById('count-seconds');
 
-  function updateCountdown() {
+  function update() {
     const now = new Date().getTime();
     const diff = targetDate - now;
 
     if (diff <= 0) {
-      document.querySelectorAll('.countdown-number').forEach(el => el.textContent = '0');
+      if (daysEl) daysEl.textContent = '00';
+      if (hoursEl) hoursEl.textContent = '00';
+      if (minutesEl) minutesEl.textContent = '00';
+      if (secondsEl) secondsEl.textContent = '00';
       return;
     }
 
@@ -136,398 +43,218 @@ function initCountdown() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    const daysEl = document.getElementById('countdown-days');
-    const hoursEl = document.getElementById('countdown-hours');
-    const minutesEl = document.getElementById('countdown-minutes');
-    const secondsEl = document.getElementById('countdown-seconds');
-
-    if (daysEl) daysEl.textContent = days;
-    if (hoursEl) hoursEl.textContent = hours;
-    if (minutesEl) minutesEl.textContent = minutes;
-    if (secondsEl) secondsEl.textContent = seconds;
+    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  update();
+  setInterval(update, 1000);
 }
 
-/* ===== Floating Particles ===== */
-function initParticles() {
-  const canvas = document.getElementById('particles-canvas');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let animId;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = canvas.height + 20;
-      this.size = Math.random() * 4 + 2;
-      this.speedY = -(Math.random() * 0.8 + 0.2);
-      this.speedX = (Math.random() - 0.5) * 0.5;
-      this.opacity = Math.random() * 0.5 + 0.15;
-      this.rotation = Math.random() * 360;
-      this.rotationSpeed = (Math.random() - 0.5) * 2;
-      this.type = Math.random() > 0.5 ? 'heart' : 'star';
-      this.color = Math.random() > 0.5 ? '#c9a84c' : '#e8d5a3';
-    }
-
-    update() {
-      this.y += this.speedY;
-      this.x += this.speedX + Math.sin(this.y * 0.01) * 0.3;
-      this.rotation += this.rotationSpeed;
-      this.opacity -= 0.001;
-
-      if (this.y < -20 || this.opacity <= 0) {
-        this.reset();
-      }
-    }
-
-    draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation * Math.PI / 180);
-      ctx.globalAlpha = this.opacity;
-      ctx.fillStyle = this.color;
-
-      if (this.type === 'heart') {
-        this.drawHeart(this.size);
-      } else {
-        this.drawStar(this.size);
-      }
-
-      ctx.restore();
-    }
-
-    drawHeart(size) {
-      ctx.beginPath();
-      const x = 0, y = 0;
-      ctx.moveTo(x, y + size / 4);
-      ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + size / 4);
-      ctx.bezierCurveTo(x - size / 2, y + size / 2, x, y + size * 0.7, x, y + size);
-      ctx.bezierCurveTo(x, y + size * 0.7, x + size / 2, y + size / 2, x + size / 2, y + size / 4);
-      ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + size / 4);
-      ctx.fill();
-    }
-
-    drawStar(size) {
-      ctx.beginPath();
-      for (let i = 0; i < 5; i++) {
-        const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
-        const x = Math.cos(angle) * size;
-        const y = Math.sin(angle) * size;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
-
-  const count = Math.min(35, Math.floor(window.innerWidth / 28));
-  for (let i = 0; i < count; i++) {
-    const p = new Particle();
-    p.y = Math.random() * canvas.height;
-    particles.push(p);
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    animId = requestAnimationFrame(animate);
-  }
-
-  animate();
-}
-
-/* ===== Ambient Turkish Romantic Melodic Synthesizer ===== */
-// Uses Web Audio API to play a soothing, romantic acoustic Oud/Kanun-inspired melody
-class TurkishMelodySynth {
-  constructor() {
-    this.ctx = null;
-    this.isPlaying = false;
-    this.timer = null;
-    this.step = 0;
-    // Turkish Nihavend / Rast romantic acoustic notes (frequencies in Hz)
-    this.notes = [
-      220.00, // A3
-      246.94, // B3
-      261.63, // C4
-      293.66, // D4
-      329.63, // E4
-      349.23, // F4
-      392.00, // G4
-      440.00, // A4
-      493.88, // B4
-      523.25, // C5
-      587.33  // D5
-    ];
-    // Romantic melody pattern (indices into this.notes)
-    this.melody = [
-      { n: 4, d: 0.6 }, { n: 6, d: 0.4 }, { n: 7, d: 0.8 },
-      { n: 6, d: 0.4 }, { n: 4, d: 0.6 }, { n: 3, d: 0.8 },
-      { n: 2, d: 0.4 }, { n: 3, d: 0.4 }, { n: 4, d: 0.8 },
-      { n: 2, d: 0.6 }, { n: 0, d: 1.0 },
-      // Second phrase
-      { n: 4, d: 0.5 }, { n: 7, d: 0.5 }, { n: 9, d: 0.9 },
-      { n: 8, d: 0.4 }, { n: 7, d: 0.6 }, { n: 6, d: 0.8 },
-      { n: 4, d: 0.4 }, { n: 3, d: 0.4 }, { n: 2, d: 0.8 },
-      { n: 0, d: 1.2 }
-    ];
-  }
-
-  initContext() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) this.ctx = new AudioCtx();
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
-
-  playPluck(freq, duration) {
-    if (!this.ctx) return;
-    const now = this.ctx.currentTime;
-    
-    // Main warm oscillator (triangle for acoustic wood resonance)
-    const osc = this.ctx.createOscillator();
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(freq, now);
-
-    // Subtle overtone for plucked string authenticity
-    const osc2 = this.ctx.createOscillator();
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(freq * 2, now);
-
-    // Low-pass filter simulating wooden acoustic body
-    const filter = this.ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1400, now);
-    filter.frequency.exponentialRampToValueAtTime(350, now + duration);
-
-    // Gain envelope with soft gentle pluck
-    const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.linearRampToValueAtTime(0.12, now + 0.03);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 1.5);
-
-    const gain2 = this.ctx.createGain();
-    gain2.gain.setValueAtTime(0.03, now);
-    gain2.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-    osc.connect(filter);
-    osc2.connect(filter);
-    filter.connect(gain);
-    gain.connect(this.ctx.destination);
-
-    osc.start(now);
-    osc2.start(now);
-    osc.stop(now + duration * 1.6);
-    osc2.stop(now + duration * 1.6);
-  }
-
-  start() {
-    this.initContext();
-    this.isPlaying = true;
-    this.step = 0;
-
-    const playNext = () => {
-      if (!this.isPlaying) return;
-      const item = this.melody[this.step % this.melody.length];
-      const freq = this.notes[item.n];
-      this.playPluck(freq, item.d);
-      
-      this.step++;
-      const nextDelay = (item.d * 1000) + 150;
-      this.timer = setTimeout(playNext, nextDelay);
-    };
-
-    playNext();
-  }
-
-  stop() {
-    this.isPlaying = false;
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = null;
-    }
-  }
-}
-
-const synthPlayer = new TurkishMelodySynth();
-
-/* ===== Music Toggle ===== */
-function initMusicToggle() {
-  const toggle = document.querySelector('.music-toggle');
-  const audio = document.getElementById('bg-music');
-  const soundBars = document.querySelector('.sound-bars');
-  if (!toggle) return;
+/* ============================================================
+   ROYAL AUDIO PLAYER (CANON IN D MAJOR & ACOUSTIC SUITE)
+   ============================================================ */
+function initAudioPlayer() {
+  const playerBtn = document.getElementById('audio-player-btn');
+  const audioElement = document.getElementById('wedding-audio');
+  if (!playerBtn || !audioElement) return;
 
   let isPlaying = false;
-  const hasAudioSource = audio && audio.querySelector('source') && audio.querySelector('source').getAttribute('src');
 
-  function startMusic() {
-    isPlaying = true;
-    toggle.classList.add('playing');
-    if (soundBars) soundBars.classList.add('playing');
-
-    if (hasAudioSource) {
-      audio.play().catch(() => {
-        synthPlayer.start();
-      });
-    } else {
-      synthPlayer.start();
-    }
-  }
-
-  function stopMusic() {
-    isPlaying = false;
-    toggle.classList.remove('playing');
-    if (soundBars) soundBars.classList.remove('playing');
-
-    if (hasAudioSource) {
-      audio.pause();
-    }
-    synthPlayer.stop();
-  }
-
-  toggle.addEventListener('click', () => {
+  function togglePlay() {
     if (isPlaying) {
-      stopMusic();
+      audioElement.pause();
+      isPlaying = false;
+      playerBtn.classList.remove('playing');
+      const label = playerBtn.querySelector('.audio-label');
+      if (label) label.textContent = 'Play Music';
     } else {
-      startMusic();
+      audioElement.play().then(() => {
+        isPlaying = true;
+        playerBtn.classList.add('playing');
+        const label = playerBtn.querySelector('.audio-label');
+        if (label) label.textContent = 'Playing Music';
+      }).catch(err => {
+        console.log('Playback requires user gesture:', err);
+      });
     }
-  });
+  }
 
-  // Autoplay attempt on first user touch/click
+  playerBtn.addEventListener('click', togglePlay);
+
+  // Auto-play attempt on first user click anywhere on page
   function firstInteraction() {
     if (!isPlaying) {
-      startMusic();
+      audioElement.play().then(() => {
+        isPlaying = true;
+        playerBtn.classList.add('playing');
+        const label = playerBtn.querySelector('.audio-label');
+        if (label) label.textContent = 'Playing Music';
+      }).catch(() => {});
     }
     document.removeEventListener('click', firstInteraction);
-    document.removeEventListener('touchstart', firstInteraction);
   }
 
   document.addEventListener('click', firstInteraction, { once: true });
-  document.addEventListener('touchstart', firstInteraction, { once: true });
 }
 
-/* ===== Guestbook ===== */
+/* ============================================================
+   INTERACTIVE RSVP FORM
+   ============================================================ */
+function initRSVPForm() {
+  const form = document.getElementById('rsvp-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector('[name="guest_name"]')?.value || '';
+    const attendance = form.querySelector('input[name="attendance"]:checked')?.value || 'Attending';
+    const guests = form.querySelector('[name="guest_count"]')?.value || '1';
+    const diet = form.querySelector('[name="dietary"]')?.value || 'None';
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Confirming RSVP...';
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      // Store in localStorage
+      const existing = JSON.parse(localStorage.getItem('luxury_rsvp_submissions') || '[]');
+      existing.push({
+        name,
+        attendance,
+        guests,
+        diet,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      });
+      localStorage.setItem('luxury_rsvp_submissions', JSON.stringify(existing));
+
+      // Show confirmation message
+      form.innerHTML = `
+        <div style="text-align: center; padding: 2rem 1rem;">
+          <div style="width: 50px; height: 50px; margin: 0 auto 1rem; border-radius: 50%; border: 1.5px solid #b89340; display: flex; align-items: center; justify-content: center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#b89340">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+          </div>
+          <h4 style="font-family: 'Cinzel', serif; font-size: 1.25rem; color: #0e2238; margin-bottom: 0.5rem; letter-spacing: 1px;">
+            Thank You, ${escapeHtml(name)}
+          </h4>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #5e5e5e; line-height: 1.8;">
+            Your response has been formally received. We eagerly look forward to celebrating with you in Istanbul.
+          </p>
+        </div>
+      `;
+    }, 700);
+  });
+}
+
+/* ============================================================
+   GUESTBOOK OF CONGRATULATIONS
+   ============================================================ */
 function initGuestbook() {
   const form = document.getElementById('guestbook-form');
-  const feed = document.getElementById('wishes-feed');
-  if (!form || !feed) return;
+  const feed = document.getElementById('guestbook-feed');
+  if (!feed) return;
 
-  const pageKey = document.body.dataset.page || 'default';
-  const storageKey = `wedding_wishes_${pageKey}`;
+  const storageKey = 'wedding_guestbook_wishes_en';
+
+  const defaultWishes = [
+    {
+      name: 'Lord & Lady Harrington',
+      message: 'Sending our warmest congratulations to Alexander and Sophia. Istanbul is the most magnificent setting for such a regal union.',
+      time: '2 hours ago'
+    },
+    {
+      name: 'Victoria & Julian Sterling',
+      message: 'To a lifetime of love, laughter, and grand adventures. We cannot wait to toast with you at Çırağan Palace.',
+      time: '5 hours ago'
+    },
+    {
+      name: 'Dr. Marcus Vance',
+      message: 'May your marriage be blessed with unending joy and mutual devotion. Looking forward to celebrating on the Bosphorus.',
+      time: 'Yesterday'
+    },
+    {
+      name: 'Eleanor & Charles Beaumont',
+      message: 'A truly breathtaking couple. Wishing you both a glorious wedding celebration and a lifetime of shared happiness.',
+      time: '2 days ago'
+    }
+  ];
 
   function loadWishes() {
-    const wishes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    let wishes = JSON.parse(localStorage.getItem(storageKey) || '[]');
     if (wishes.length === 0) {
-      const demoWishes = getDemoWishes(pageKey);
-      demoWishes.forEach(w => wishes.push(w));
+      wishes = defaultWishes;
       localStorage.setItem(storageKey, JSON.stringify(wishes));
     }
     renderWishes(wishes);
   }
 
   function renderWishes(wishes) {
-    feed.innerHTML = wishes.map(wish => `
-      <div class="wish-card">
-        <div class="wish-author">${escapeHtml(wish.name)}</div>
-        <div class="wish-message">${escapeHtml(wish.message)}</div>
-        <div class="wish-time">${wish.time}</div>
+    feed.innerHTML = wishes.map(w => `
+      <div class="guestbook-entry">
+        <div class="entry-author">${escapeHtml(w.name)}</div>
+        <div class="entry-body">${escapeHtml(w.message)}</div>
+        <div class="entry-time">${w.time}</div>
       </div>
     `).reverse().join('');
   }
 
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = form.querySelector('[name="author_name"]');
+      const msgInput = form.querySelector('[name="author_message"]');
+      const name = nameInput.value.trim();
+      const message = msgInput.value.trim();
 
-  function getDemoWishes(page) {
-    if (page === 'groom') {
-      return [
-        { name: 'Ahmet Yılmaz', message: 'Ömür boyu mutluluklar diliyorum! Allah bir yastıkta kocatsın. 🤲', time: '2 saat önce' },
-        { name: 'Fatma Demir', message: 'Ne güzel bir çift olmuşsunuz! Düğününüz hayırlı olsun! 💐', time: '5 saat önce' },
-        { name: 'Mehmet Kaya', message: 'Tebrikler kardeşim! Yuvanız daim, sevginiz sonsuz olsun! 🎉', time: '1 gün önce' },
-        { name: 'Elif Şahin', message: 'Masallah! Gözünüz aydın olsun, hayırlı uğurlu olsun! ❤️', time: '2 gün önce' },
-      ];
-    } else {
-      return [
-        { name: 'Zeynep Aksoy', message: 'Kınana çok güzeldi canım! Allah mesut etsin ikinizi de! 🧿', time: '3 saat önce' },
-        { name: 'Ayşe Korkmaz', message: 'En güzel gelin sen oldun! Ömür boyu mutluluklar! 👰💕', time: '6 saat önce' },
-        { name: 'Selin Yıldız', message: 'Masallah masallah! Kına geceniz çok eğlenceliydi! 🎶', time: '1 gün önce' },
-        { name: 'Derya Öztürk', message: 'İkinize de ömür boyu sağlık ve mutluluk diliyorum! 🌹', time: '2 gün önce' },
-      ];
-    }
-  }
+      if (!name || !message) return;
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const nameInput = form.querySelector('[name="guest-name"]');
-    const messageInput = form.querySelector('[name="guest-message"]');
-    
-    const name = nameInput.value.trim();
-    const message = messageInput.value.trim();
-    
-    if (!name || !message) return;
+      const wishes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      wishes.push({
+        name,
+        message,
+        time: 'Just now'
+      });
+      localStorage.setItem(storageKey, JSON.stringify(wishes));
+      renderWishes(wishes);
 
-    const wishes = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    wishes.push({
-      name,
-      message,
-      time: 'Şimdi'
+      nameInput.value = '';
+      msgInput.value = '';
+
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.textContent;
+      btn.textContent = 'Message Sent';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
     });
-    
-    localStorage.setItem(storageKey, JSON.stringify(wishes));
-    renderWishes(wishes);
-
-    nameInput.value = '';
-    messageInput.value = '';
-
-    const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    btn.textContent = '✓ Gönderildi!';
-    btn.style.background = '#4caf50';
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = '';
-    }, 2000);
-  });
+  }
 
   loadWishes();
 }
 
-/* ===== Smooth Scroll for Anchor Links ===== */
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a[href^="#"]');
-  if (!link) return;
-  
-  e.preventDefault();
-  const target = document.querySelector(link.getAttribute('href'));
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-});
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+/* ============================================================
+   SMOOTH SCROLL FOR IN-PAGE ANCHORS
+   ============================================================ */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}

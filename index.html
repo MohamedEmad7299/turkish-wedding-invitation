@@ -1,232 +1,202 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="landing">
+<html lang="en" data-theme="navy">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Emre & Elif - Düğün Davetiyesi | Türk Düğün Davetiyesi">
-  <title>Emre & Elif — Düğün Davetiyesi 💍</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+  <meta name="description" content="The Wedding Celebrations of Alexander & Sophia — A Luxury Destination Wedding in Istanbul, Turkey.">
+  <title>Alexander & Sophia — The Wedding Celebrations</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* Landing Page Specific Styles */
-    .landing-bg-pattern {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .landing-header-ornament {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 100%);
-      pointer-events: none;
-    }
-
-    .landing-card {
-      position: relative;
-    }
-
-    .brand-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .watercolor-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      opacity: 0.06;
-      background:
-        radial-gradient(ellipse at 10% 90%, rgba(12,92,92,0.8) 0%, transparent 40%),
-        radial-gradient(ellipse at 90% 10%, rgba(122,30,63,0.6) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.4) 0%, transparent 50%);
-    }
-
-    /* Istanbul skyline at bottom */
-    .skyline-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 100px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.08;
-    }
-
-    /* Nazar boncugu (evil eye) decorations */
-    .nazar {
-      position: absolute;
-      font-size: 1.2rem;
-      opacity: 0.15;
-      animation: float 4s ease-in-out infinite;
-    }
-    .nazar:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
-    .nazar:nth-child(2) { top: 25%; right: 10%; animation-delay: 1s; }
-    .nazar:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 2s; }
-    .nazar:nth-child(4) { bottom: 30%; right: 8%; animation-delay: 0.5s; }
-
-    /* Tulip decorations */
-    .tulip-deco {
-      position: absolute;
-      font-size: 1.5rem;
-      opacity: 0.12;
-      animation: float 5s ease-in-out infinite;
-    }
-    .tulip-deco:nth-child(1) { top: 40%; left: 5%; animation-delay: 0.5s; }
-    .tulip-deco:nth-child(2) { top: 60%; right: 5%; animation-delay: 1.5s; }
-  </style>
 </head>
 <body>
-  <!-- Loading Screen -->
-  <div class="loading-screen">
-    <div class="loading-icon">🌷</div>
-    <div class="loading-text">Davetiyeniz Hazırlanıyor...</div>
-  </div>
 
-  <!-- Particles -->
-  <canvas id="particles-canvas"></canvas>
+  <!-- Top Floating Navigation -->
+  <header class="top-nav-bar">
+    <div class="nav-monogram">A &amp; S</div>
+    <div style="display: flex; gap: 0.5rem;">
+      <a href="damat.html" class="nav-link-btn">Wedding Gala</a>
+      <a href="gelin.html" class="nav-link-btn">Welcome Soirée</a>
+    </div>
+  </header>
 
-  <!-- Background -->
-  <div class="page-wrapper landing-backdrop">
-    <div class="landing-bg-pattern"></div>
-    <div class="landing-header-ornament"></div>
-    <div class="ottoman-pattern"></div>
+  <!-- Page Container -->
+  <main class="page-container" style="padding-top: 5rem;">
 
-    <!-- Floating decorations -->
-    <div class="nazar">🧿</div>
-    <div class="nazar">🧿</div>
-    <div class="nazar">🧿</div>
-    <div class="nazar">🧿</div>
-    <div class="tulip-deco">🌷</div>
-    <div class="tulip-deco">🌷</div>
+    <!-- Main Invitation Stationery Sheet -->
+    <article class="invitation-sheet">
 
-    <!-- Main Content -->
-    <div class="landing-content">
-      <!-- Main Card -->
-      <div class="landing-card animate-fade-in-up">
-        <!-- Heart Badge sitting on the card top border -->
-        <div class="heart-badge animate-scale-in">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
+      <!-- Monogram Crest -->
+      <div class="monogram-crest">
+        <div class="crest-symbol">
+          <span class="crest-letters">A&amp;S</span>
         </div>
+        <div class="crest-subtitle">Destination Wedding &bull; Istanbul, Turkey</div>
+      </div>
 
-        <div class="watercolor-overlay"></div>
-
-        <!-- Couple Names -->
-        <h1 class="couple-names animate-fade-in-up delay-2">
-          Emre <span class="ampersand">&</span> Elif
-        </h1>
-
-        <p class="couple-subtitle animate-fade-in-up delay-2">Evleniyoruz</p>
-
-        <!-- Date -->
-        <div class="date-display animate-fade-in-up delay-3">
-          20 Kasım 2026
-        </div>
-
-        <!-- Ottoman Divider -->
-        <div class="ottoman-divider animate-fade-in delay-3">
-          <span class="tulip">🌷</span>
-        </div>
-
-        <!-- Welcome Text -->
-        <p class="welcome-text animate-fade-in-up delay-3">
-          Hayatımızın en güzel gününde sizi yanımızda görmek istiyoruz.
-          <br>Sevgiyle ve heyecanla bekliyoruz.
+      <!-- Formal Heading -->
+      <header class="invitation-header">
+        <p class="invitation-intro">
+          Together with their families, they request the honour of your presence at the celebrations of their marriage
         </p>
+        <h1 class="couple-title">
+          Alexander James Wright
+          <span class="ampersand">&amp;</span>
+          Sophia Elena Demir
+        </h1>
+        <p class="font-sans text-gold" style="font-size: 0.75rem; letter-spacing: 4px; margin-top: 1rem;">
+          November 18 &ndash; 20, 2026 &bull; Istanbul, Turkey
+        </p>
+      </header>
 
-        <!-- Invitation Verse -->
-        <div class="hero-quote animate-fade-in-up delay-4" style="padding: 1rem; margin-bottom: 1rem;">
-          <p class="quote-text" style="font-size: 1rem; line-height: 1.8;">
-            Kaynaşmanız için size kendi cinsinizden eşler yaratıp, aranıza sevgi ve merhamet koyması da O'nun ayetlerindendir.
+      <!-- Luxury Divider -->
+      <div class="luxury-divider">
+        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      </div>
+
+      <!-- Featured Grand Palace Venue Artwork -->
+      <div class="section-block">
+        <div class="artwork-frame">
+          <img src="assets/palace-venue.jpg" alt="Çırağan Palace Kempinski on the Bosphorus, Istanbul">
+        </div>
+        <p class="artwork-caption">
+          The Imperial Bosphorus Estate &bull; Çırağan Palace Kempinski, Istanbul
+        </p>
+      </div>
+
+      <!-- Countdown to Istanbul -->
+      <div class="countdown-box" data-countdown="2026-11-20T17:00:00">
+        <div class="countdown-heading">Countdown to Istanbul</div>
+        <div class="countdown-numbers">
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-days">00</div>
+            <div class="countdown-unit">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-hours">00</div>
+            <div class="countdown-unit">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-minutes">00</div>
+            <div class="countdown-unit">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-seconds">00</div>
+            <div class="countdown-unit">Seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wedding Events Overview / Two Portals -->
+      <div class="section-block">
+        <h2 class="section-title">Wedding Itinerary &amp; Events</h2>
+        <p class="section-subtitle">Please select an event below to view formal invitations and details</p>
+
+        <!-- Event 1: The Wedding Gala (Groom & Bride) -->
+        <div class="portal-card">
+          <div class="portal-thumb">
+            <img src="assets/envelope-blue.jpg" alt="The Formal Wedding Invitation Envelope">
+          </div>
+          <div class="portal-body">
+            <div class="portal-tag">Formal Black Tie Celebration</div>
+            <h3 class="portal-name">The Wedding Ceremony &amp; Gala Reception</h3>
+            <p class="portal-date-venue">
+              Friday, November 20, 2026 &bull; 4:30 PM<br>
+              The Grand Ballroom &bull; Çırağan Palace Kempinski, Istanbul
+            </p>
+            <a href="damat.html" class="btn-luxury btn-primary-navy">View Wedding Invitation</a>
+          </div>
+        </div>
+
+        <!-- Event 2: Welcome Soirée & Henna Night -->
+        <div class="portal-card">
+          <div class="portal-thumb">
+            <img src="assets/henna-celebration.jpg" alt="The Traditional Bosphorus Henna Night">
+          </div>
+          <div class="portal-body">
+            <div class="portal-tag">Traditional Welcome Celebration</div>
+            <h3 class="portal-name">The Welcome Soirée &amp; Henna Celebration</h3>
+            <p class="portal-date-venue">
+              Wednesday, November 18, 2026 &bull; 6:00 PM<br>
+              The Waterfront Terrace &bull; Sait Halim Pasha Mansion, Yeniköy
+            </p>
+            <a href="gelin.html" class="btn-luxury btn-primary-burgundy">View Soirée Invitation</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destination Travel Highlights -->
+      <div class="section-block">
+        <h2 class="section-title">Destination Guide: Istanbul</h2>
+        <p class="section-subtitle">Information for our international guests traveling to Turkey</p>
+
+        <div class="guide-card">
+          <div class="guide-header">
+            <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            <h4 class="guide-title">Arrival &amp; Airport Concierge</h4>
+          </div>
+          <p class="guide-text">
+            International flights should be booked to Istanbul Airport (IST) or Sabiha Gökçen Airport (SAW). Private chauffeur services and VIP airport transfers have been arranged for all wedding guests via the concierge desk.
           </p>
-          <p class="quote-author">— Rum Suresi, 30:21</p>
         </div>
 
-        <!-- Couple Cards -->
-        <div class="couple-cards animate-fade-in-up delay-4">
-          <!-- Groom Card -->
-          <a href="damat.html" class="person-card">
-            <span class="person-icon">🤵</span>
-            <div class="person-name">Emre</div>
-            <div class="person-role">Damat</div>
-            <span class="btn-open">Davetiyeyi Aç</span>
-          </a>
-
-          <!-- Bride Card -->
-          <a href="gelin.html" class="person-card bride-card">
-            <span class="person-icon">👰</span>
-            <div class="person-name">Elif</div>
-            <div class="person-role">Gelin</div>
-            <span class="btn-open">Davetiyeyi Aç</span>
-          </a>
+        <div class="guide-card">
+          <div class="guide-header">
+            <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+            <h4 class="guide-title">Accommodations &amp; Palace Suites</h4>
+          </div>
+          <p class="guide-text">
+            Preferential guest room blocks have been secured at Çırağan Palace Kempinski Istanbul and Four Seasons Hotel Istanbul at the Bosphorus. Please reference booking code <strong>AS-WED2026</strong> upon reservation.
+          </p>
         </div>
 
-        <!-- RSVP Badge -->
-        <div class="rsvp-badge animate-fade-in delay-5">
-          <div class="rsvp-dot"></div>
-          <span>Davet Aktif</span>
+        <div class="guide-card">
+          <div class="guide-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <h4 class="guide-title">Curated Bosphorus Cruise</h4>
+          </div>
+          <p class="guide-text">
+            Guests arriving early are cordially invited to a private sunset cruise along the Bosphorus strait on Thursday afternoon, departing from the Çırağan Palace private yacht pier.
+          </p>
         </div>
       </div>
 
-      <!-- Brand Tag -->
-      <div class="brand-tag animate-fade-in delay-5">
-        Made with ❤️ in Türkiye
+      <!-- Romantic Editorial Photo Feature -->
+      <div class="section-block">
+        <h2 class="section-title">The Couple</h2>
+        <p class="section-subtitle">Moments captured along their journey</p>
+        <div class="artwork-frame">
+          <img src="assets/couple-portrait.jpg" alt="Alexander &amp; Sophia in Istanbul">
+        </div>
       </div>
+
+      <!-- Stationery Footer -->
+      <footer class="stationery-footer">
+        <p class="footer-quote">
+          &ldquo;Two lives, two hearts, joined in friendship, united forever in love.&rdquo;
+        </p>
+        <div class="footer-monogram">A &bull; S</div>
+        <p class="footer-credits">
+          &copy; 2026 Alexander &amp; Sophia &bull; Istanbul, Turkey
+        </p>
+      </footer>
+
+    </article>
+  </main>
+
+  <!-- Audio Player Floating Bar (Canon in D Major) -->
+  <div class="floating-audio-bar" id="audio-player-btn" title="Toggle Ceremony Music">
+    <div class="audio-icon-box">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
     </div>
-
-    <!-- Istanbul Skyline -->
-    <div class="skyline-container">
-      <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:100%;fill:rgba(255,255,255,0.6);">
-        <!-- Mosque 1 -->
-        <path d="M0,120 L0,90 L30,90 L30,70 Q50,30 70,70 L70,90 L75,90 L75,40 L78,40 L78,90 L100,90 L100,80 Q120,50 140,80 L140,90 L180,90 L180,120Z"/>
-        <!-- Mosque 2 -->
-        <path d="M200,120 L200,85 L220,85 L220,60 Q240,20 260,60 L260,85 L265,85 L265,30 L268,25 L271,30 L271,85 L280,85 L280,60 Q300,25 320,60 L320,85 L340,85 L340,120Z"/>
-        <!-- Bridge/Buildings -->
-        <path d="M360,120 L360,95 L380,95 L380,80 L395,80 L395,70 L410,70 L410,80 L425,80 L425,65 L440,65 L440,80 L460,80 L460,95 L480,95 L480,120Z"/>
-        <!-- Maiden's Tower -->
-        <path d="M520,120 L520,95 L540,95 L540,75 Q550,55 560,75 L560,95 L565,95 L565,50 L568,45 L571,50 L571,95 L580,95 L580,120Z"/>
-        <!-- Modern Istanbul -->
-        <path d="M620,120 L620,90 L635,90 L635,55 L650,55 L650,90 L660,90 L660,70 L670,70 L670,45 L680,45 L680,70 L690,70 L690,90 L720,90 L720,120Z"/>
-        <!-- Galata Tower -->
-        <path d="M760,120 L760,95 L775,95 L775,50 Q780,35 785,50 L785,95 L790,95 L790,45 L793,30 L796,45 L796,95 L800,95 L800,120Z"/>
-        <!-- More buildings -->
-        <path d="M840,120 L840,85 L860,85 L860,70 Q880,40 900,70 L900,85 L910,85 L910,95 L940,95 L940,75 L960,75 L960,95 L980,95 L980,120Z"/>
-        <!-- Mosque 3 -->
-        <path d="M1000,120 L1000,90 L1020,90 L1020,65 Q1050,20 1080,65 L1080,90 L1085,90 L1085,35 L1088,25 L1091,35 L1091,90 L1100,90 L1100,65 Q1120,30 1140,65 L1140,90 L1160,90 L1160,120Z"/>
-        <!-- Fill to edge -->
-        <path d="M1160,120 L1160,95 L1200,95 L1200,120Z"/>
-      </svg>
+    <span class="audio-label">Play Music</span>
+    <div class="sound-bars-indicator">
+      <span></span><span></span><span></span>
     </div>
   </div>
 
-  <!-- Music Toggle -->
-  <button class="music-toggle" title="Müzik Aç/Kapat" aria-label="Müzik kontrolü">
-    <div class="sound-bars">
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-    </div>
-  </button>
+  <audio id="wedding-audio" loop preload="auto">
+    <source src="assets/wedding-music.ogg" type="audio/ogg">
+    <source src="assets/wedding-music.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="main.js"></script>
 </body>

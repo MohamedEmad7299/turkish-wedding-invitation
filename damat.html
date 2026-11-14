@@ -1,457 +1,363 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="groom">
+<html lang="en" data-theme="navy">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Emre & Elif Düğün Töreni Davetiyesi - 20 Kasım 2026">
-  <title>Emre & Elif — Düğün Töreni 🤵</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤵</text></svg>">
+  <meta name="description" content="Formal Wedding Ceremony &amp; Gala Reception Invitation for Alexander &amp; Sophia at Çırağan Palace Kempinski, Istanbul.">
+  <title>The Wedding Ceremony &amp; Gala Reception — Alexander &amp; Sophia</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* Groom page specific */
-    .paper-texture {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #fdf8f0;
-      background-image:
-        radial-gradient(ellipse at 20% 80%, rgba(12,92,92,0.04) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
-      z-index: 0;
-    }
-
-    .page-header-gradient {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 300px;
-      background: linear-gradient(180deg, rgba(12,92,92,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Photo placeholder */
-    .couple-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      background: var(--primary-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      box-shadow: 0 4px 20px rgba(12,92,92,0.2), 0 0 0 4px white, 0 0 0 6px var(--gold-light);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .couple-photo::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-      border-radius: 50%;
-    }
-
-    /* Decorative leaf garland */
-    .garland {
-      text-align: center;
-      font-size: 1.5rem;
-      letter-spacing: 8px;
-      opacity: 0.3;
-      margin: 1rem 0;
-    }
-
-    /* Venue card enhancement */
-    .venue-highlight {
-      background: var(--cream);
-      border: 1.5px solid var(--gold-light);
-      border-radius: var(--border-radius-sm);
-      padding: 1.5rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .venue-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.3rem;
-    }
-
-    .venue-address {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Dress code section */
-    .dress-code {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1.5rem;
-      background: white;
-      border-radius: var(--border-radius-sm);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--cream-dark);
-    }
-
-    .dress-code-item {
-      text-align: center;
-    }
-
-    .dress-code-item .icon {
-      font-size: 2rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .dress-code-item .label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* Success notification */
-    .toast {
-      position: fixed;
-      bottom: 5rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--primary);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      z-index: 200;
-      opacity: 0;
-      transition: all 0.5s ease;
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-  </style>
 </head>
-<body data-page="groom">
-  <!-- Loading Screen -->
-  <div class="loading-screen" style="background: #fdf8f0;">
-    <div class="loading-icon">🤵</div>
-    <div class="loading-text">Düğün Davetiyesi Yükleniyor...</div>
-  </div>
+<body>
 
-  <!-- Particles -->
-  <canvas id="particles-canvas"></canvas>
+  <!-- Top Floating Navigation -->
+  <header class="top-nav-bar">
+    <a href="index.html" class="nav-link-btn">&larr; Portal Home</a>
+    <div class="nav-monogram">A &amp; S</div>
+    <a href="gelin.html" class="nav-link-btn">Welcome Soirée &rarr;</a>
+  </header>
 
-  <!-- Background -->
-  <div class="paper-texture"></div>
-  <div class="page-header-gradient"></div>
-  <div class="ottoman-pattern"></div>
+  <!-- Page Container -->
+  <main class="page-container" style="padding-top: 5rem;">
 
-  <!-- Navigation Back -->
-  <a href="index.html" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-    Ana Sayfa
-  </a>
+    <!-- Main Invitation Stationery Sheet -->
+    <article class="invitation-sheet">
 
-  <!-- Switch to Bride Invitation -->
-  <a href="gelin.html" class="nav-switch" title="Kına Gecesi Davetiyesi">
-    👰 Kına Gecesi
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 11h12.17l-5.59-5.59L12 4l8 8-8 8-1.41-1.41L16.17 13H4v-2z"/></svg>
-  </a>
-
-  <!-- Main Content -->
-  <div class="page-wrapper invitation-backdrop" style="background:transparent;">
-    <div class="card-container" style="padding-top: 4rem;">
-
-      <!-- Section 1: Quote -->
-      <div class="section" style="opacity:1; transform:none;">
-        <div class="hero-quote">
-          <p class="quote-text">
-            Kaynaşmanız için size kendi cinsinizden eşler yaratıp, aranıza sevgi ve merhamet koyması da O'nun ayetlerindendir.
-          </p>
-          <p class="quote-author">— Rum Suresi, 30:21</p>
+      <!-- Monogram Crest -->
+      <div class="monogram-crest">
+        <div class="crest-symbol">
+          <span class="crest-letters">A&amp;S</span>
         </div>
+        <div class="crest-subtitle">The Wedding Ceremony &amp; Gala Reception</div>
+      </div>
 
-        <div class="ottoman-divider">
-          <span class="tulip">🌷</span>
+      <!-- Formal Envelope Hero (The User's Real Uploaded Asset) -->
+      <div class="envelope-hero">
+        <div class="envelope-image-frame">
+          <img src="assets/envelope-blue.jpg" alt="Formal Wedding Invitation Envelope with Couple Photograph and Wax Seal">
         </div>
       </div>
 
-      <!-- Section 2: Envelope & Photo -->
-      <div class="section">
-        <div class="envelope-section">
-          <!-- Envelope Graphic -->
-          <div class="envelope-graphic">
-            <div class="envelope-body">
-              <div class="envelope-seal">💍</div>
-              <div class="envelope-names">Emre ♡ Elif</div>
-            </div>
-          </div>
-        </div>
+      <!-- Formal Wedding Invitation Announcement -->
+      <header class="invitation-header">
+        <p class="invitation-intro">
+          Mr. and Mrs. William James Wright<br>
+          and<br>
+          Dr. and Mrs. Kaan Demir<br>
+          request the honour of your presence at the marriage of their children
+        </p>
 
-        <div class="garland">🍃 🌿 🍃 🌿 🍃</div>
+        <h1 class="couple-title">
+          Alexander James Wright
+          <span class="ampersand">&amp;</span>
+          Sophia Elena Demir
+        </h1>
 
-        <!-- Couple Photo Placeholder -->
-        <div class="couple-photo">
-          <span>💑</span>
-        </div>
+        <p class="font-sans text-gold" style="font-size: 0.8rem; letter-spacing: 3px; margin: 1.5rem 0 0.5rem;">
+          Friday, The Twentieth of November<br>
+          Two Thousand Twenty-Six<br>
+          at Half-Past Four in the Afternoon
+        </p>
+
+        <p class="font-serif" style="font-size: 1.15rem; font-style: italic; color: var(--navy-primary); margin-top: 0.75rem;">
+          The Grand Ballroom &bull; Çırağan Palace Kempinski<br>
+          Yıldız, Çırağan Caddesi No:32, Beşiktaş, Istanbul, Turkey
+        </p>
+      </header>
+
+      <!-- Luxury Divider -->
+      <div class="luxury-divider">
+        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       </div>
 
-      <!-- Section 3: Main Invitation Card -->
-      <div class="section">
-        <div class="invitation-card">
-          <!-- Corner Ornaments -->
-          <div class="corner-ornament top-left"></div>
-          <div class="corner-ornament top-right"></div>
-          <div class="corner-ornament bottom-left"></div>
-          <div class="corner-ornament bottom-right"></div>
-
-          <div class="card-inner">
-            <div class="invitation-label">Düğün Davetiyesi</div>
-
-            <h2 class="invitation-couple-names">
-              Emre Yılmaz
-              <span class="amp">&</span>
-              Elif Demir
-            </h2>
-
-            <p class="invitation-statement">
-              Ailelerimizin mutluluğuyla, hayatımızı birleştirdiğimiz bu güzel günde sizi de aramızda görmekten büyük mutluluk duyacağız.
-              <br><br>
-              Varlığınızla şeref vereceğiniz düğün törenimize saygıyla davet ederiz.
-            </p>
-
-            <!-- Event Details -->
-            <div class="event-info">
-              <div class="event-info-item">
-                <div class="info-icon">📅</div>
-                <div>
-                  <div class="info-label">Tarih</div>
-                  <div class="info-value">Cuma, 20 Kasım 2026</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">⏰</div>
-                <div>
-                  <div class="info-label">Saat</div>
-                  <div class="info-value">Akşam Saat 19:00</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">📍</div>
-                <div>
-                  <div class="info-label">Mekan</div>
-                  <div class="info-value">Çırağan Sarayı Balo Salonu</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">👔</div>
-                <div>
-                  <div class="info-label">Kıyafet Kodu</div>
-                  <div class="info-value">Resmi / Davetiye Kıyafeti</div>
-                </div>
-              </div>
+      <!-- Essential Event Details -->
+      <div class="section-block">
+        <h2 class="section-title">Event Information</h2>
+        <div class="details-grid">
+          
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 4: Countdown -->
-      <div class="section">
-        <div class="countdown-section" data-countdown="2026-11-20T19:00:00">
-          <h3 class="countdown-title">Büyük Güne Geri Sayım</h3>
-
-          <div class="countdown-grid">
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-days">0</div>
-              <div class="countdown-label">Gün</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-hours">0</div>
-              <div class="countdown-label">Saat</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-minutes">0</div>
-              <div class="countdown-label">Dakika</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-seconds">0</div>
-              <div class="countdown-label">Saniye</div>
+            <div class="detail-content">
+              <div class="detail-label">Date &amp; Day</div>
+              <div class="detail-value">Friday, November 20, 2026</div>
+              <div class="detail-desc">Guest arrivals commence at 4:00 PM; ceremony begins promptly at 4:30 PM.</div>
             </div>
           </div>
 
-          <p class="countdown-tagline">
-            Mutluluğumuz başladı · Hayırlısıyla inşallah 🤲
-          </p>
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Venue Location</div>
+              <div class="detail-value">Çırağan Palace Kempinski</div>
+              <div class="detail-desc">The Imperial Bosphorus Terrace &amp; Grand Ballroom, Beşiktaş, Istanbul. Complimentary valet service and private boat docking are provided.</div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2v1.07C17.61 5.57 20 8.01 20 11v5l3 3v1H1v-1l3-3v-5c0-2.99 2.39-5.43 6-5.93V4c0-1.1.9-2 2-2zm0 20c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"/></svg>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Dress Code Guidelines</div>
+              <div class="detail-value">Black Tie &bull; Formal Evening Attire</div>
+              <div class="detail-desc">Gentlemen are requested to wear tuxedos or dark formal suits. Ladies are invited to wear floor-length evening gowns or sophisticated formal cocktail attire.</div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Section 5: Gallery Placeholder -->
-      <div class="section">
-        <div class="gallery-section">
-          <h3 class="gallery-title">Bizim Hikayemiz</h3>
-          <p class="gallery-subtitle">Birlikte geçen güzel anlarımız</p>
-
-          <div class="gallery-grid">
-            <div class="gallery-item" style="background: linear-gradient(135deg, #0c5c5c, #1a8a8a); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🌅</span>
-              <div class="gallery-overlay"><span>İstanbul'da Gün Batımı</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #074040, #0c5c5c); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">☕</span>
-              <div class="gallery-overlay"><span>İlk Türk Kahvemiz</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #1a7a7a, #0c5c5c); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🌉</span>
-              <div class="gallery-overlay"><span>Boğaz'da Bir Akşam</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #0c5c5c, #074040); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">💐</span>
-              <div class="gallery-overlay"><span>Nişan Günümüz</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #074040, #1a8a8a); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🌷</span>
-              <div class="gallery-overlay"><span>Lale Bahçesinde</span></div>
-            </div>
+      <!-- Live Countdown -->
+      <div class="countdown-box" data-countdown="2026-11-20T16:30:00">
+        <div class="countdown-heading">Countdown to the Nuptials</div>
+        <div class="countdown-numbers">
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-days">00</div>
+            <div class="countdown-unit">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-hours">00</div>
+            <div class="countdown-unit">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-minutes">00</div>
+            <div class="countdown-unit">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-seconds">00</div>
+            <div class="countdown-unit">Seconds</div>
           </div>
         </div>
       </div>
 
-      <!-- Section 6: Venue & Map -->
-      <div class="section">
-        <div class="map-section">
-          <h3 class="map-title">Düğün Mekanımız</h3>
+      <!-- Detailed Order of Events / Schedule -->
+      <div class="section-block">
+        <h2 class="section-title">Order of Events</h2>
+        <p class="section-subtitle">A celebration spanning the Bosphorus sunset to midnight</p>
 
-          <div class="venue-highlight">
-            <div class="venue-name">🏰 Çırağan Sarayı Balo Salonu</div>
-            <div class="venue-address">Çırağan Cd. No:32, Beşiktaş, İstanbul</div>
+        <div class="timeline-list">
+          
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">4:00 PM &ndash; 4:30 PM</div>
+            <div class="timeline-title-text">Guest Arrival &amp; Welcome Refreshments</div>
+            <div class="timeline-desc-text">Guests are welcomed at the Imperial Gate with vintage champagne, iced fruit infusions, and gentle classical string quartet melodies.</div>
           </div>
 
-          <div class="map-container mt-2">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.1!2d29.0224!3d41.0464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab76d3a0b8e25%3A0x45e4d0c3e0c4f0a0!2s%C3%87%C4%B1ra%C4%9Fan%20Palace%20Kempinski%20Istanbul!5e0!3m2!1str!2str"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">4:30 PM &ndash; 5:30 PM</div>
+            <div class="timeline-title-text">The Nuptial Ceremony</div>
+            <div class="timeline-desc-text">Exchange of marriage vows and rings on the open-air Bosphorus Marble Terrace overlooking the Asian coastline.</div>
           </div>
 
-          <a href="https://maps.google.com/?q=Çırağan+Sarayı+İstanbul" target="_blank" class="btn btn-primary mt-2">
-            📍 Yol Tarifi Al
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">5:30 PM &ndash; 7:00 PM</div>
+            <div class="timeline-title-text">Golden Hour Cocktails &amp; Canapés</div>
+            <div class="timeline-desc-text">Sunset cocktails, artisanal Mediterranean canapés, and live jazz trio on the palace fountain gardens.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">7:00 PM &ndash; 9:30 PM</div>
+            <div class="timeline-title-text">Five-Course Royal Gala Banquet</div>
+            <div class="timeline-desc-text">Seated gourmet dinner inside the crystal-chandeliered Sultan Ballroom, accompanied by family speeches and celebratory toasts.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">9:30 PM</div>
+            <div class="timeline-title-text">Cutting of the Cake &amp; First Dance</div>
+            <div class="timeline-desc-text">The newlyweds take the floor for their first dance, followed by celebratory champagne and wedding cake service.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node"></div>
+            <div class="timeline-time-badge">10:00 PM &ndash; Late</div>
+            <div class="timeline-title-text">The Grand Celebration &amp; After-Party</div>
+            <div class="timeline-desc-text">Live international orchestra, dancing, late-night gourmet Turkish street food bar, and celebration into the evening.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- The Grand Palace Venue Artwork Section -->
+      <div class="section-block">
+        <h2 class="section-title">The Imperial Venue</h2>
+        <p class="section-subtitle">Çırağan Palace Kempinski, Istanbul</p>
+
+        <div class="artwork-frame">
+          <img src="assets/palace-venue.jpg" alt="Çırağan Palace Imperial Architecture &amp; Fountain Terrace">
+        </div>
+        <p class="artwork-caption">
+          Dating back to the 17th century, Çırağan Palace is the sole Ottoman Imperial Palace situated on the European shores of the Bosphorus.
+        </p>
+
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.1!2d29.0224!3d41.0464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab76d3a0b8e25%3A0x45e4d0c3e0c4f0a0!2s%C3%87%C4%B1ra%C4%9Fan%20Palace%20Kempinski%20Istanbul!5e0!3m2!1sen!2str"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="https://maps.google.com/?q=Ciragan+Palace+Kempinski+Istanbul" target="_blank" class="btn-luxury btn-outline">
+            Open in Google Maps &amp; Navigation
           </a>
         </div>
       </div>
 
-      <!-- Section 7: Guestbook -->
-      <div class="section">
-        <div class="guestbook-section">
-          <div class="guestbook-header">
-            <h3 class="guestbook-title">Dileklerinizi Bırakın 💌</h3>
-            <p class="guestbook-subtitle">Güzel sözleriniz bizim için çok değerli</p>
+      <!-- Editorial Photo Gallery -->
+      <div class="section-block">
+        <h2 class="section-title">Curated Gallery</h2>
+        <p class="section-subtitle">Portraits and celebrations</p>
+
+        <div class="gallery-collection">
+          <div class="gallery-photo-item span-two">
+            <img src="assets/bosphorus-sunset.jpg" alt="Istanbul Bosphorus Sunset Panorama">
+          </div>
+          <div class="gallery-photo-item">
+            <img src="assets/groom-portrait.jpg" alt="Alexander in Formal Tuxedo">
+          </div>
+          <div class="gallery-photo-item">
+            <img src="assets/bride-portrait.jpg" alt="Sophia in Bridal Gown">
+          </div>
+          <div class="gallery-photo-item">
+            <img src="assets/wedding-rings.jpg" alt="Bespoke Gold Wedding Bands">
+          </div>
+          <div class="gallery-photo-item">
+            <img src="assets/wedding-table.jpg" alt="Imperial Palace Banquet Tablescape">
+          </div>
+        </div>
+      </div>
+
+      <!-- Formal RSVP Section -->
+      <div class="section-block" id="rsvp-section">
+        <h2 class="section-title">Formal Response &bull; RSVP</h2>
+        <p class="section-subtitle">Kindly submit your response by October 15, 2026</p>
+
+        <form class="rsvp-card" id="rsvp-form">
+          <div class="form-field">
+            <label class="form-label" for="guest_name">Full Name(s)</label>
+            <input type="text" id="guest_name" name="guest_name" class="form-input" placeholder="e.g., Lord &amp; Lady Sterling" required>
           </div>
 
-          <form class="guestbook-form" id="guestbook-form">
-            <div class="form-group">
-              <label class="form-label" for="guest-name">Adınız</label>
-              <input class="form-input" type="text" name="guest-name" id="guest-name" placeholder="Adınızı yazınız..." required>
+          <div class="form-field">
+            <label class="form-label">Attendance Status</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="Joyfully Accepts" checked>
+                Joyfully Accepts
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="Regretfully Declines">
+                Regretfully Declines
+              </label>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="guest-message">Tebrik Mesajınız</label>
-              <textarea class="form-textarea" name="guest-message" id="guest-message" placeholder="Tebriklerinizi ve güzel dileklerinizi yazınız..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-gold" style="width:100%;">
-              💌 Tebriği Gönder
-            </button>
-          </form>
+          </div>
 
-          <div class="wishes-feed" id="wishes-feed"></div>
+          <div class="form-field">
+            <label class="form-label" for="guest_count">Number of Attending Guests</label>
+            <select id="guest_count" name="guest_count" class="form-select">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="dietary">Dietary Preferences</label>
+            <select id="dietary" name="dietary" class="form-select">
+              <option value="Standard Gala Menu" selected>Standard Gala Menu</option>
+              <option value="Halal">Halal Cuisine</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Pescatarian">Pescatarian</option>
+              <option value="Gluten-Free">Gluten-Free</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="hotel_notes">Hotel &amp; Transfer Requirements</label>
+            <input type="text" id="hotel_notes" name="hotel_notes" class="form-input" placeholder="e.g., Staying at Çırağan Palace; need airport transfer">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="song_request">Song Request for Orchestra / DJ</label>
+            <input type="text" id="song_request" name="song_request" class="form-input" placeholder="A song that will guarantee you on the dance floor">
+          </div>
+
+          <button type="submit" class="btn-luxury btn-primary-navy" style="width: 100%; margin-top: 0.5rem;">
+            Confirm My Attendance
+          </button>
+        </form>
+      </div>
+
+      <!-- Honeymoon Wishing Well -->
+      <div class="section-block">
+        <h2 class="section-title">Wishing Well &bull; Registry</h2>
+        <div class="guide-card" style="text-align: center; padding: 2rem 1.5rem;">
+          <p class="guide-text" style="font-size: 1.05rem; font-style: italic; max-width: 440px; margin: 0 auto;">
+            &ldquo;Your presence on the Bosphorus is the greatest treasure we could ask for. However, should you wish to honour us with a gift, a contribution to our Cappadocia &amp; Aegean Honeymoon Expedition would be received with our deepest gratitude.&rdquo;
+          </p>
         </div>
       </div>
 
-      <!-- Section 8: Dress Code -->
-      <div class="section">
-        <div class="section-header">
-          <h3 class="section-title">Kıyafet Rehberi</h3>
-          <p class="section-subtitle">Gecemize uygun kıyafet önerileri</p>
-        </div>
-        <div class="dress-code">
-          <div class="dress-code-item">
-            <div class="icon">🤵</div>
-            <div class="label">Takım Elbise</div>
+      <!-- Guestbook of Congratulations -->
+      <div class="section-block">
+        <h2 class="section-title">Guestbook of Wishes</h2>
+        <p class="section-subtitle">Heartfelt words and congratulations from loved ones</p>
+
+        <form class="rsvp-card" id="guestbook-form" style="margin-bottom: 1.5rem;">
+          <div class="form-field">
+            <label class="form-label" for="author_name">Your Name</label>
+            <input type="text" id="author_name" name="author_name" class="form-input" placeholder="Your full name" required>
           </div>
-          <div class="dress-code-item">
-            <div class="icon">👗</div>
-            <div class="label">Abiye</div>
+          <div class="form-field">
+            <label class="form-label" for="author_message">Congratulatory Message</label>
+            <textarea id="author_message" name="author_message" class="form-textarea" placeholder="Share your warm wishes with Alexander &amp; Sophia..." required></textarea>
           </div>
-          <div class="dress-code-item">
-            <div class="icon">🎨</div>
-            <div class="label">Koyu Tonlar</div>
-          </div>
-          <div class="dress-code-item">
-            <div class="icon">🌿</div>
-            <div class="label">Teal & Gold</div>
-          </div>
-        </div>
+          <button type="submit" class="btn-luxury btn-gold" style="width: 100%;">
+            Send Congratulations
+          </button>
+        </form>
+
+        <div class="guestbook-feed" id="guestbook-feed"></div>
       </div>
 
-      <!-- Istanbul Skyline Decoration -->
-      <div class="section" style="opacity:1; transform:none;">
-        <div class="istanbul-skyline">
-          <svg viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,80 L0,60 L20,60 L20,40 Q35,15 50,40 L50,60 L53,60 L53,20 L55,15 L57,20 L57,60 L70,60 L70,45 Q85,20 100,45 L100,60 L130,60 L130,50 L145,50 L145,35 L160,35 L160,50 L175,50 L175,60 L200,60 L200,45 Q215,15 230,45 L230,60 L233,60 L233,18 L235,10 L237,18 L237,60 L250,60 L250,45 Q265,20 280,45 L280,60 L310,60 L310,65 L340,65 L340,50 L350,50 L350,35 L355,35 L355,20 L360,15 L365,20 L365,35 L370,35 L370,50 L380,50 L380,65 L420,65 L420,55 Q435,25 450,55 L450,65 L453,65 L453,25 L455,18 L457,25 L457,65 L470,65 L470,50 L490,50 L490,40 L505,40 L505,50 L520,50 L520,65 L560,65 L560,50 Q575,20 590,50 L590,65 L593,65 L593,22 L595,12 L597,22 L597,65 L610,65 L610,55 L630,55 L630,45 L645,45 L645,30 L650,25 L655,30 L655,45 L670,45 L670,55 L690,55 L690,65 L730,65 L730,50 Q745,25 760,50 L760,65 L763,65 L763,28 L765,20 L767,28 L767,65 L800,65 L800,80Z" fill="currentColor"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <footer class="site-footer">
+      <!-- Stationery Footer -->
+      <footer class="stationery-footer">
         <p class="footer-quote">
-          "Varlığınızla şeref verdiniz, teşekkür ederiz." 🌷
+          &ldquo;Love recognizes no barriers. It jumps hurdles, leaps fences, penetrates walls to arrive at its destination full of hope.&rdquo;
         </p>
-
-        <div class="ottoman-divider" style="max-width:200px;">
-          <span class="tulip">✦</span>
-        </div>
-
-        <p class="footer-copyright">
-          © 2026 Emre & Elif · Designed with ❤️ in İstanbul
+        <div class="footer-monogram">A &bull; S</div>
+        <p class="footer-credits">
+          &copy; 2026 Alexander &amp; Sophia &bull; Çırağan Palace, Istanbul
         </p>
       </footer>
+
+    </article>
+  </main>
+
+  <!-- Audio Player Floating Bar (Canon in D Major) -->
+  <div class="floating-audio-bar" id="audio-player-btn" title="Toggle Ceremony Music">
+    <div class="audio-icon-box">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+    <span class="audio-label">Play Music</span>
+    <div class="sound-bars-indicator">
+      <span></span><span></span><span></span>
     </div>
   </div>
 
-  <!-- Music Toggle -->
-  <button class="music-toggle" title="Müzik Aç/Kapat" aria-label="Müzik kontrolü">
-    <div class="sound-bars">
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-    </div>
-  </button>
-
-  <!-- Scroll to Top -->
-  <button class="scroll-top" title="Yukarı Çık" aria-label="Sayfa başına dön">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
-
-  <!-- Background Music (placeholder - replace src with actual music file) -->
-  <audio id="bg-music" loop preload="auto">
-    <!-- Replace with your Turkish wedding music file -->
-    <!-- <source src="music/dugun-muzigi.mp3" type="audio/mpeg"> -->
+  <audio id="wedding-audio" loop preload="auto">
+    <source src="assets/wedding-music.ogg" type="audio/ogg">
+    <source src="assets/wedding-music.mp3" type="audio/mpeg">
   </audio>
 
   <script src="main.js"></script>

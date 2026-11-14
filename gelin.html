@@ -1,639 +1,317 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="bride">
+<html lang="en" data-theme="burgundy">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Emre & Elif Kına Gecesi Davetiyesi - 18 Kasım 2026">
-  <title>Emre & Elif — Kına Gecesi 👰</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👰</text></svg>">
+  <meta name="description" content="Welcome Soirée &amp; Traditional Bosphorus Henna Night Celebration for Alexander &amp; Sophia at Sait Halim Pasha Mansion, Istanbul.">
+  <title>The Welcome Soirée &amp; Henna Celebration — Alexander &amp; Sophia</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* Bride page specific styles */
-    .paper-texture {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #fdf6f4;
-      background-image:
-        radial-gradient(ellipse at 20% 80%, rgba(122,30,63,0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(122,30,63,0.02) 0%, transparent 60%);
-      z-index: 0;
-    }
-
-    .page-header-gradient {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 300px;
-      background: linear-gradient(180deg, rgba(122,30,63,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Henna hand decoration */
-    .henna-decoration {
-      text-align: center;
-      font-size: 4rem;
-      margin: 1rem 0;
-      filter: drop-shadow(0 2px 8px rgba(122,30,63,0.2));
-    }
-
-    /* Couple Photo - Rose version */
-    .couple-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      background: var(--primary-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      box-shadow: 0 4px 20px rgba(122,30,63,0.2), 0 0 0 4px white, 0 0 0 6px var(--gold-light);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .couple-photo::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-      border-radius: 50%;
-    }
-
-    /* Rose garland */
-    .garland {
-      text-align: center;
-      font-size: 1.5rem;
-      letter-spacing: 8px;
-      opacity: 0.35;
-      margin: 1rem 0;
-    }
-
-    /* Henna ceremony highlight */
-    .ceremony-highlight {
-      background: linear-gradient(135deg, rgba(122,30,63,0.05), rgba(201,168,76,0.05));
-      border: 1.5px solid var(--gold-light);
-      border-radius: var(--border-radius-sm);
-      padding: 1.5rem;
-      text-align: center;
-      margin: 1rem 0;
-    }
-
-    .ceremony-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .ceremony-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.3rem;
-    }
-
-    .ceremony-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Rose petals floating */
-    .rose-deco {
-      position: absolute;
-      font-size: 1.2rem;
-      opacity: 0.12;
-      animation: float 5s ease-in-out infinite;
-      z-index: 1;
-    }
-    .rose-deco:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-    .rose-deco:nth-child(2) { top: 20%; right: 8%; animation-delay: 1.2s; }
-    .rose-deco:nth-child(3) { top: 45%; left: 3%; animation-delay: 0.6s; }
-    .rose-deco:nth-child(4) { top: 70%; right: 5%; animation-delay: 2s; }
-    .rose-deco:nth-child(5) { bottom: 15%; left: 8%; animation-delay: 1.5s; }
-
-    /* Venue card */
-    .venue-highlight {
-      background: #fdf6f4;
-      border: 1.5px solid var(--gold-light);
-      border-radius: var(--border-radius-sm);
-      padding: 1.5rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .venue-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.3rem;
-    }
-
-    .venue-address {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Kına traditions info */
-    .traditions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .tradition-item {
-      background: white;
-      border-radius: 12px;
-      padding: 1.2rem 1rem;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(122,30,63,0.08);
-      transition: var(--transition);
-    }
-
-    .tradition-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(122,30,63,0.12);
-    }
-
-    .tradition-item .t-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .tradition-item .t-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 0.2rem;
-    }
-
-    .tradition-item .t-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Poem section */
-    .poem-card {
-      background: var(--primary-gradient);
-      border-radius: var(--border-radius);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .poem-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='1' fill='%23ffffff' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .poem-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.9);
-      font-style: italic;
-      line-height: 2;
-      position: relative;
-      z-index: 1;
-    }
-
-    .poem-author {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.75rem;
-      color: var(--gold-light);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-  </style>
 </head>
-<body data-page="bride">
-  <!-- Loading Screen -->
-  <div class="loading-screen" style="background: #fdf6f4;">
-    <div class="loading-icon">👰</div>
-    <div class="loading-text">Kına Gecesi Davetiyesi Hazırlanıyor...</div>
-  </div>
+<body>
 
-  <!-- Particles -->
-  <canvas id="particles-canvas"></canvas>
+  <!-- Top Floating Navigation -->
+  <header class="top-nav-bar">
+    <a href="index.html" class="nav-link-btn">&larr; Portal Home</a>
+    <div class="nav-monogram">A &amp; S</div>
+    <a href="damat.html" class="nav-link-btn">Wedding Gala &rarr;</a>
+  </header>
 
-  <!-- Background -->
-  <div class="paper-texture"></div>
-  <div class="page-header-gradient"></div>
-  <div class="ottoman-pattern"></div>
+  <!-- Page Container -->
+  <main class="page-container" style="padding-top: 5rem;">
 
-  <!-- Floating Rose Petals -->
-  <div class="rose-deco">🌹</div>
-  <div class="rose-deco">🌸</div>
-  <div class="rose-deco">🌹</div>
-  <div class="rose-deco">🌸</div>
-  <div class="rose-deco">🌹</div>
+    <!-- Main Invitation Stationery Sheet -->
+    <article class="invitation-sheet">
 
-  <!-- Navigation Back -->
-  <a href="index.html" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-    Ana Sayfa
-  </a>
+      <!-- Monogram Crest -->
+      <div class="monogram-crest">
+        <div class="crest-symbol" style="border-color: var(--burgundy-primary);">
+          <span class="crest-letters" style="color: var(--burgundy-primary);">A&amp;S</span>
+        </div>
+        <div class="crest-subtitle">The Welcome Soirée &amp; Traditional Henna Celebration</div>
+      </div>
 
-  <!-- Switch to Groom Invitation -->
-  <a href="damat.html" class="nav-switch" title="Düğün Davetiyesi">
-    🤵 Düğün Töreni
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 11h12.17l-5.59-5.59L12 4l8 8-8 8-1.41-1.41L16.17 13H4v-2z"/></svg>
-  </a>
+      <!-- Hero Artwork: Traditional Henna Celebration -->
+      <div class="envelope-hero">
+        <div class="envelope-image-frame" style="border-color: #ffffff;">
+          <img src="assets/henna-celebration.jpg" alt="Traditional Bosphorus Henna Night Celebration">
+        </div>
+      </div>
 
-  <!-- Main Content -->
-  <div class="page-wrapper invitation-backdrop" style="background:transparent;">
-    <div class="card-container" style="padding-top: 4rem;">
+      <!-- Formal Heading -->
+      <header class="invitation-header">
+        <p class="invitation-intro">
+          Prior to the nuptial exchange, you are cordially invited to celebrate the joyous pre-wedding festivities in honour of our bride
+        </p>
 
-      <!-- Section 1: Turkish Love Poem -->
-      <div class="section" style="opacity:1; transform:none;">
-        <div class="hero-quote">
-          <p class="quote-text">
-            Seni sevmek güzel şey, ümitli şey,<br>
-            dünyanın en güzel sesine<br>
-            en güzel şarkısını söyletmek.
+        <h1 class="couple-title">
+          Sophia Elena Demir
+          <span class="ampersand">&amp;</span>
+          Alexander James Wright
+        </h1>
+
+        <p class="font-sans text-gold" style="font-size: 0.8rem; letter-spacing: 3px; margin: 1.5rem 0 0.5rem;">
+          Wednesday, The Eighteenth of November<br>
+          Two Thousand Twenty-Six<br>
+          at Half-Past Five in the Evening
+        </p>
+
+        <p class="font-serif" style="font-size: 1.15rem; font-style: italic; color: var(--burgundy-primary); margin-top: 0.75rem;">
+          The Waterfront Pavilion &bull; Sait Halim Pasha Mansion<br>
+          Köybaşı Caddesi No:83, Yeniköy, Sarıyer, Istanbul, Turkey
+        </p>
+      </header>
+
+      <!-- Luxury Divider -->
+      <div class="luxury-divider">
+        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      </div>
+
+      <!-- Essential Event Details -->
+      <div class="section-block">
+        <h2 class="section-title">Evening Information</h2>
+        <div class="details-grid">
+          
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Date &amp; Day</div>
+              <div class="detail-value">Wednesday, November 18, 2026</div>
+              <div class="detail-desc">Reception begins at 5:30 PM on the waterfront pier; traditional blessing ceremony commences at 6:30 PM.</div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Mansion Venue</div>
+              <div class="detail-value">Sait Halim Pasha Mansion</div>
+              <div class="detail-desc">A 19th-century Ottoman Bosphorus estate featuring grand waterfront gardens and authentic imperial ballrooms.</div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2v1.07C17.61 5.57 20 8.01 20 11v5l3 3v1H1v-1l3-3v-5c0-2.99 2.39-5.43 6-5.93V4c0-1.1.9-2 2-2zm0 20c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"/></svg>
+            </div>
+            <div class="detail-content">
+              <div class="detail-label">Attire Suggestion</div>
+              <div class="detail-value">Festive Elegant &bull; Cocktail Chic</div>
+              <div class="detail-desc">Rich jewel tones (Burgundy, Ruby, Emerald, Gold, Champagne). Guests are encouraged to dress festively for an evening of dancing and celebration.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Countdown -->
+      <div class="countdown-box" data-countdown="2026-11-18T17:30:00">
+        <div class="countdown-heading">Countdown to the Welcome Soirée</div>
+        <div class="countdown-numbers">
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-days">00</div>
+            <div class="countdown-unit">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-hours">00</div>
+            <div class="countdown-unit">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-minutes">00</div>
+            <div class="countdown-unit">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-digit" id="count-seconds">00</div>
+            <div class="countdown-unit">Seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order of Evening Events -->
+      <div class="section-block">
+        <h2 class="section-title">Evening Itinerary</h2>
+        <p class="section-subtitle">An authentic Ottoman waterfront evening celebration</p>
+
+        <div class="timeline-list">
+          
+          <div class="timeline-row">
+            <div class="timeline-node" style="border-color: var(--burgundy-primary);"></div>
+            <div class="timeline-time-badge">5:30 PM &ndash; 6:30 PM</div>
+            <div class="timeline-title-text">Waterfront Welcome &amp; Sunset Cocktails</div>
+            <div class="timeline-desc-text">Guests arrive via private boat pier to artisanal Turkish delights, rose champagne, and live Mediterranean guitar duets.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node" style="border-color: var(--burgundy-primary);"></div>
+            <div class="timeline-time-badge">6:30 PM &ndash; 7:30 PM</div>
+            <div class="timeline-title-text">The Henna Blessing &amp; Candlelight Procession</div>
+            <div class="timeline-desc-text">The traditional ceremony where the bride enters accompanied by candlelight, accompanied by blessings, symbolic gold coins, and traditional floral songs.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node" style="border-color: var(--burgundy-primary);"></div>
+            <div class="timeline-time-badge">7:30 PM &ndash; 9:00 PM</div>
+            <div class="timeline-title-text">Bosphorus Feasting &amp; Meze Banquet</div>
+            <div class="timeline-desc-text">A sumptuous spread of Aegean seafood, charcoal-grilled delicacies, Turkish mezes, and warm baklava accompanied by Turkish tea and coffee service.</div>
+          </div>
+
+          <div class="timeline-row">
+            <div class="timeline-node" style="border-color: var(--burgundy-primary);"></div>
+            <div class="timeline-time-badge">9:00 PM &ndash; Midnight</div>
+            <div class="timeline-title-text">Traditional Folk Music, Halay &amp; Dancing</div>
+            <div class="timeline-desc-text">High-energy folk dances, international dance rhythms, and waterfront revelry under the illuminated Bosphorus bridges.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Cultural Tradition Explanation for International Guests -->
+      <div class="section-block">
+        <h2 class="section-title">The Henna Tradition Explained</h2>
+        <p class="section-subtitle">A heritage dating back centuries in Mediterranean and Ottoman culture</p>
+
+        <div class="guide-card">
+          <div class="guide-header">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <h4 class="guide-title">Symbolism of the Henna Ceremony</h4>
+          </div>
+          <p class="guide-text">
+            In Turkish wedding tradition, the Henna Night (Kına Gecesi) is an intimate celebration symbolizing devotion, fertility, and protection for the bride before she enters her new home. As a sign of prosperity, the mother-in-law places a gold coin into the bride's palm before the organic botanical henna is wrapped in red silk.
           </p>
-          <p class="quote-author">— Nazım Hikmet</p>
         </div>
 
-        <div class="ottoman-divider">
-          <span class="tulip">🌹</span>
-        </div>
-      </div>
-
-      <!-- Section 2: Henna Decoration & Photo -->
-      <div class="section">
-        <div class="envelope-section">
-          <!-- Envelope Graphic - Rose Version -->
-          <div class="envelope-graphic">
-            <div class="envelope-body">
-              <div class="envelope-seal">❤️</div>
-              <div class="envelope-names">Emre ♡ Elif</div>
-            </div>
+        <div class="guide-card">
+          <div class="guide-header">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            <h4 class="guide-title">The Halay Circle Dance</h4>
           </div>
-        </div>
-
-        <div class="garland">🌸 🌺 🌸 🌺 🌸</div>
-
-        <!-- Henna Ceremony Highlight -->
-        <div class="ceremony-highlight">
-          <div class="ceremony-icon">🤲</div>
-          <div class="ceremony-name">Kına Gecesi</div>
-          <div class="ceremony-desc">Gelin için son bekarlık gecesi kutlaması</div>
-        </div>
-
-        <!-- Couple Photo Placeholder -->
-        <div class="couple-photo">
-          <span>👰</span>
-        </div>
-      </div>
-
-      <!-- Section 3: Main Invitation Card -->
-      <div class="section">
-        <div class="invitation-card">
-          <!-- Corner Ornaments -->
-          <div class="corner-ornament top-left"></div>
-          <div class="corner-ornament top-right"></div>
-          <div class="corner-ornament bottom-left"></div>
-          <div class="corner-ornament bottom-right"></div>
-
-          <div class="card-inner">
-            <div class="invitation-label">Kına Gecesi Davetiyesi</div>
-
-            <h2 class="invitation-couple-names">
-              Emre Yılmaz
-              <span class="amp">&</span>
-              Elif Demir
-            </h2>
-
-            <p class="invitation-statement">
-              Güzeller güzeli gelinimiz Elif'in kına gecesine katılmanızı
-              ve bu özel anı bizimle paylaşmanızı bekliyoruz.
-              <br><br>
-              Gelininize kınasını yakıp, dualarınızla uğurlamanızı dileriz.
-            </p>
-
-            <!-- Event Details -->
-            <div class="event-info">
-              <div class="event-info-item">
-                <div class="info-icon">📅</div>
-                <div>
-                  <div class="info-label">Tarih</div>
-                  <div class="info-value">Çarşamba, 18 Kasım 2026</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">⏰</div>
-                <div>
-                  <div class="info-label">Saat</div>
-                  <div class="info-value">Akşam Saat 17:00</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">📍</div>
-                <div>
-                  <div class="info-label">Mekan</div>
-                  <div class="info-value">Demir Ailesinin Evi</div>
-                </div>
-              </div>
-
-              <div class="event-info-item">
-                <div class="info-icon">👗</div>
-                <div>
-                  <div class="info-label">Kıyafet</div>
-                  <div class="info-value">Rahat & Şık Kıyafetler</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 4: Day Timeline -->
-      <div class="section">
-        <div class="timeline-section">
-          <div class="timeline-card">
-            <h3 class="timeline-title">🕐 Günün Programı</h3>
-
-            <div class="timeline-item">
-              <div class="timeline-time">17:00</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-event">Misafir Karşılama</div>
-                <div class="timeline-desc">Çay ve Türk lokumu ikramı</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">17:30</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-event">Kına Yakma Töreni</div>
-                <div class="timeline-desc">Geleneksel kına yakma merasimi</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">18:00</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-event">Yemek & İkram</div>
-                <div class="timeline-desc">Türk mutfağından özel menü</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">19:00</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-event">Eğlence & Dans</div>
-                <div class="timeline-desc">Müzik, halay ve eğlence</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-time">20:30</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-event">Dualar & Veda</div>
-                <div class="timeline-desc">Güzel dilekler ve hatıra fotoğrafları</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 5: Countdown -->
-      <div class="section">
-        <div class="countdown-section" data-countdown="2026-11-18T17:00:00">
-          <h3 class="countdown-title">Kına Gecesine Geri Sayım</h3>
-
-          <div class="countdown-grid">
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-days">0</div>
-              <div class="countdown-label">Gün</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-hours">0</div>
-              <div class="countdown-label">Saat</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-minutes">0</div>
-              <div class="countdown-label">Dakika</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-number" id="countdown-seconds">0</div>
-              <div class="countdown-label">Saniye</div>
-            </div>
-          </div>
-
-          <p class="countdown-tagline">
-            Gelinimize kınasını yakacağız · Hayırlı olsun 🌹
+          <p class="guide-text">
+            All guests, international and local alike, join hand-in-hand to participate in the joyous Halay circle dance, led by the rhythmic pulse of acoustic drums and woodwinds along the waterfront terrace.
           </p>
         </div>
       </div>
 
-      <!-- Section 6: Turkish Poetry Card -->
-      <div class="section">
-        <div class="poem-card" style="margin: 0 1rem;">
-          <p class="poem-text">
-            Aşk bir güneştir, ışık saçar her yana,<br>
-            Sevgi bir çiçektir, kök salar her kana.<br>
-            İki kalp birleşir, bir ömür sürer,<br>
-            Dualarla başlar, mutlulukla yürer.
-          </p>
-          <p class="poem-author">— Türk Düğün Geleneği</p>
-        </div>
-      </div>
+      <!-- Photo Gallery -->
+      <div class="section-block">
+        <h2 class="section-title">Celebration Moments</h2>
+        <p class="section-subtitle">Memories by the Bosphorus</p>
 
-      <!-- Section 7: Kına Traditions -->
-      <div class="section">
-        <div style="padding: 0 1rem;">
-          <div class="section-header">
-            <h3 class="section-title">Kına Gecesi Gelenekleri</h3>
-            <p class="section-subtitle">Asırlık Türk düğün geleneklerimiz</p>
+        <div class="gallery-collection">
+          <div class="gallery-photo-item span-two">
+            <img src="assets/couple-portrait.jpg" alt="Alexander &amp; Sophia in Istanbul">
           </div>
-
-          <div class="traditions-grid">
-            <div class="tradition-item">
-              <div class="t-icon">🤲</div>
-              <div class="t-name">Kına Yakma</div>
-              <div class="t-desc">Gelinin avucuna kına yakılır</div>
-            </div>
-            <div class="tradition-item">
-              <div class="t-icon">💃</div>
-              <div class="t-name">Halay</div>
-              <div class="t-desc">El ele geleneksel dans</div>
-            </div>
-            <div class="tradition-item">
-              <div class="t-icon">🎶</div>
-              <div class="t-name">Kına Türküsü</div>
-              <div class="t-desc">Duygusal kına şarkıları</div>
-            </div>
-            <div class="tradition-item">
-              <div class="t-icon">🧿</div>
-              <div class="t-name">Nazar Duası</div>
-              <div class="t-desc">Nazardan korunma duaları</div>
-            </div>
-            <div class="tradition-item">
-              <div class="t-icon">🌹</div>
-              <div class="t-name">Çiçek Tacı</div>
-              <div class="t-desc">Gelinin başına çiçek tacı</div>
-            </div>
-            <div class="tradition-item">
-              <div class="t-icon">🕯️</div>
-              <div class="t-name">Mum Yakma</div>
-              <div class="t-desc">Dilek mumları yakılır</div>
-            </div>
+          <div class="gallery-photo-item">
+            <img src="assets/bride-portrait.jpg" alt="Sophia Elena Demir">
+          </div>
+          <div class="gallery-photo-item">
+            <img src="assets/wedding-table.jpg" alt="Waterfront Banquet Tablescape">
           </div>
         </div>
       </div>
 
-      <!-- Section 8: Gallery -->
-      <div class="section">
-        <div class="gallery-section">
-          <h3 class="gallery-title">Güzel Anılarımız</h3>
-          <p class="gallery-subtitle">Sevgiyle dolu günlerimiz</p>
+      <!-- Mansion Venue Map -->
+      <div class="section-block">
+        <h2 class="section-title">The Mansion Venue</h2>
+        <p class="section-subtitle">Sait Halim Pasha Mansion &bull; Yeniköy, Istanbul</p>
 
-          <div class="gallery-grid">
-            <div class="gallery-item" style="background: linear-gradient(135deg, #7a1e3f, #a02a55); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">💍</span>
-              <div class="gallery-overlay"><span>Nişan Anımız</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #551530, #7a1e3f); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🌹</span>
-              <div class="gallery-overlay"><span>Gül Bahçesi</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #9a2850, #7a1e3f); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🕌</span>
-              <div class="gallery-overlay"><span>Sultanahmet'te Bir Gün</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #7a1e3f, #551530); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🫖</span>
-              <div class="gallery-overlay"><span>Çay Saatimiz</span></div>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #551530, #a02a55); display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:3rem;">🌙</span>
-              <div class="gallery-overlay"><span>Boğaz'da Mehtap</span></div>
-            </div>
-          </div>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.9!2d29.068!3d41.121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cacab076ef684d%3A0xe744e8c1f930e126!2sSait%20Halim%20Pasha%20Mansion!5e0!3m2!1sen!2str"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
         </div>
-      </div>
 
-      <!-- Section 9: Venue & Map -->
-      <div class="section">
-        <div class="map-section">
-          <h3 class="map-title">Kına Mekanımız</h3>
-
-          <div class="venue-highlight">
-            <div class="venue-name">🏡 Demir Ailesinin Evi</div>
-            <div class="venue-address">Sultanahmet, Fatih, İstanbul</div>
-          </div>
-
-          <div class="map-container mt-2">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.5!2d28.977!3d41.005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9be92011c27%3A0x236e6f6f37444fae!2sSultanahmet%2C%20Fatih%2F%C4%B0stanbul!5e0!3m2!1str!2str"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-
-          <a href="https://maps.google.com/?q=Sultanahmet+İstanbul" target="_blank" class="btn btn-primary mt-2">
-            📍 Yol Tarifi Al
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="https://maps.google.com/?q=Sait+Halim+Pasha+Mansion+Istanbul" target="_blank" class="btn-luxury btn-primary-burgundy">
+            Open Mansion Directions in Maps
           </a>
         </div>
       </div>
 
-      <!-- Section 10: Guestbook -->
-      <div class="section">
-        <div class="guestbook-section">
-          <div class="guestbook-header">
-            <h3 class="guestbook-title">Kınaya Mesaj Bırakın 💌</h3>
-            <p class="guestbook-subtitle">Gelinimize güzel dileklerinizi iletin</p>
+      <!-- RSVP Form for Welcome Soirée -->
+      <div class="section-block" id="rsvp-section">
+        <h2 class="section-title">Soirée Response &bull; RSVP</h2>
+        <p class="section-subtitle">Kindly confirm your attendance for the Welcome Soirée by October 15, 2026</p>
+
+        <form class="rsvp-card" id="rsvp-form">
+          <div class="form-field">
+            <label class="form-label" for="guest_name">Full Name(s)</label>
+            <input type="text" id="guest_name" name="guest_name" class="form-input" placeholder="e.g., Lady Eleanor Vance" required>
           </div>
 
-          <form class="guestbook-form" id="guestbook-form">
-            <div class="form-group">
-              <label class="form-label" for="guest-name">Adınız</label>
-              <input class="form-input" type="text" name="guest-name" id="guest-name" placeholder="Adınızı yazınız..." required>
+          <div class="form-field">
+            <label class="form-label">Attendance for Welcome Soirée</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="Joyfully Attending Soirée" checked>
+                Joyfully Attending
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="attendance" value="Unable to Attend Soirée">
+                Unable to Attend
+              </label>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="guest-message">Tebrik Mesajınız</label>
-              <textarea class="form-textarea" name="guest-message" id="guest-message" placeholder="Gelinimize güzel dileklerinizi yazınız..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-gold" style="width:100%;">
-              🌹 Tebriği Gönder
-            </button>
-          </form>
+          </div>
 
-          <div class="wishes-feed" id="wishes-feed"></div>
-        </div>
+          <div class="form-field">
+            <label class="form-label" for="guest_count">Number of Attending Guests</label>
+            <select id="guest_count" name="guest_count" class="form-select">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="dietary">Dietary Preferences</label>
+            <select id="dietary" name="dietary" class="form-select">
+              <option value="Mediterranean Feast (Standard)" selected>Mediterranean Feast (Standard)</option>
+              <option value="Halal">Halal Cuisine</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Pescatarian">Pescatarian</option>
+              <option value="Gluten-Free">Gluten-Free</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-luxury btn-primary-burgundy" style="width: 100%; margin-top: 0.5rem;">
+            Confirm Soirée Attendance
+          </button>
+        </form>
       </div>
 
-      <!-- Istanbul Skyline Decoration -->
-      <div class="section" style="opacity:1; transform:none;">
-        <div class="istanbul-skyline">
-          <svg viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,80 L0,60 L20,60 L20,40 Q35,15 50,40 L50,60 L53,60 L53,20 L55,15 L57,20 L57,60 L70,60 L70,45 Q85,20 100,45 L100,60 L130,60 L130,50 L145,50 L145,35 L160,35 L160,50 L175,50 L175,60 L200,60 L200,45 Q215,15 230,45 L230,60 L233,60 L233,18 L235,10 L237,18 L237,60 L250,60 L250,45 Q265,20 280,45 L280,60 L310,60 L310,65 L340,65 L340,50 L350,50 L350,35 L355,35 L355,20 L360,15 L365,20 L365,35 L370,35 L370,50 L380,50 L380,65 L420,65 L420,55 Q435,25 450,55 L450,65 L453,65 L453,25 L455,18 L457,25 L457,65 L470,65 L470,50 L490,50 L490,40 L505,40 L505,50 L520,50 L520,65 L560,65 L560,50 Q575,20 590,50 L590,65 L593,65 L593,22 L595,12 L597,22 L597,65 L610,65 L610,55 L630,55 L630,45 L645,45 L645,30 L650,25 L655,30 L655,45 L670,45 L670,55 L690,55 L690,65 L730,65 L730,50 Q745,25 760,50 L760,65 L763,65 L763,28 L765,20 L767,28 L767,65 L800,65 L800,80Z" fill="currentColor"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <footer class="site-footer">
+      <!-- Stationery Footer -->
+      <footer class="stationery-footer">
         <p class="footer-quote">
-          "Kınası yakıldı, hayırlısı olsun, Allah mesut etsin." 🌹
+          &ldquo;Where there is love, there is life.&rdquo;
         </p>
-
-        <div class="ottoman-divider" style="max-width:200px;">
-          <span class="tulip">✦</span>
-        </div>
-
-        <p class="footer-copyright">
-          © 2026 Emre & Elif · Designed with ❤️ in İstanbul
+        <div class="footer-monogram" style="color: var(--burgundy-primary);">A &bull; S</div>
+        <p class="footer-credits">
+          &copy; 2026 Alexander &amp; Sophia &bull; Sait Halim Pasha Mansion, Istanbul
         </p>
       </footer>
+
+    </article>
+  </main>
+
+  <!-- Audio Player Floating Bar (Canon in D Major) -->
+  <div class="floating-audio-bar" id="audio-player-btn" title="Toggle Ceremony Music">
+    <div class="audio-icon-box">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+    <span class="audio-label">Play Music</span>
+    <div class="sound-bars-indicator">
+      <span></span><span></span><span></span>
     </div>
   </div>
 
-  <!-- Music Toggle -->
-  <button class="music-toggle" title="Müzik Aç/Kapat" aria-label="Müzik kontrolü">
-    <div class="sound-bars">
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-      <div class="bar" style="height:4px;"></div>
-    </div>
-  </button>
-
-  <!-- Scroll to Top -->
-  <button class="scroll-top" title="Yukarı Çık" aria-label="Sayfa başına dön">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
-
-  <!-- Background Music (placeholder) -->
-  <audio id="bg-music" loop preload="auto">
-    <!-- Replace with your kına gecesi music file -->
-    <!-- <source src="music/kina-gecesi.mp3" type="audio/mpeg"> -->
+  <audio id="wedding-audio" loop preload="auto">
+    <source src="assets/wedding-music.ogg" type="audio/ogg">
+    <source src="assets/wedding-music.mp3" type="audio/mpeg">
   </audio>
 
   <script src="main.js"></script>
